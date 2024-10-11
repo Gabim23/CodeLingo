@@ -10,33 +10,26 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar Sesión"
+        android:text="Registro de Usuario"
         android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/newUsernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Usuario" />
+        android:hint="Nuevo Usuario" />
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/newPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
+        android:hint="Nueva Contraseña"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/registerNewUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar Sesión" />
-
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrarse"
-        android:layout_marginTop="20dp" />
+        android:text="Registrar" />
 
 </LinearLayout>
