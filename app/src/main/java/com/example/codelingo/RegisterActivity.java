@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -34,13 +35,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (!newUsername.isEmpty() && !newPassword.isEmpty()) {
                     if (checkIfUserExists(newUsername)) {
-                        // El usuario ya existe
                         Toast.makeText(RegisterActivity.this, "El usuario ya existe. Por favor, elija otro nombre.", Toast.LENGTH_SHORT).show();
+                    } else if (!isValidPassword(newPassword)) {
+                        Toast.makeText(RegisterActivity.this, "La contraseña debe contener al menos una letra mayúscula y un carácter especial.", Toast.LENGTH_SHORT).show();
                     } else {
-                        // El usuario no existe, proceder con el registro
                         saveNewUser(newUsername, newPassword);
                         Toast.makeText(RegisterActivity.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
-                        finish();  // Volver a la pantalla de inicio de sesión
+                        finish();
                     }
                 } else {
                     Toast.makeText(RegisterActivity.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
@@ -79,5 +80,12 @@ public class RegisterActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // Método para validar que la contraseña contenga al menos una mayúscula y un carácter especial
+    private boolean isValidPassword(String password) {
+        // Expresión regular que requiere al menos una letra mayúscula y un carácter especial
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[@#$%^&+=?¿!¡]).{6,}$";
+        return Pattern.matches(passwordPattern, password);
     }
 }
