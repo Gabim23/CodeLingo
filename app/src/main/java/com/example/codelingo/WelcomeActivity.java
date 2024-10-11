@@ -9,6 +9,7 @@ import android.widget.Button;
 public class WelcomeActivity extends AppCompatActivity {
 
     private Button logoutButton;
+    private Button changePasswordButton; // Agregar el botón para cambiar contraseña
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +17,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         logoutButton = findViewById(R.id.logoutButton);
+        changePasswordButton = findViewById(R.id.changePasswordButton); // Inicializar el botón
 
         // Botón de cerrar sesión
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -24,6 +26,15 @@ public class WelcomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        // Botón para cambiar contraseña
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeActivity.this, ChangePasswordActivity.class);
+                startActivity(intent);
             }
         });
     }
