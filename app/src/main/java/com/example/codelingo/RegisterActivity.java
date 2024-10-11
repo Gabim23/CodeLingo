@@ -7,7 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,9 +33,15 @@ public class RegisterActivity extends AppCompatActivity {
                 String newPassword = newPasswordEditText.getText().toString();
 
                 if (!newUsername.isEmpty() && !newPassword.isEmpty()) {
-                    saveNewUser(newUsername, newPassword);
-                    Toast.makeText(RegisterActivity.this, "Usuario registrado", Toast.LENGTH_SHORT).show();
-                    finish();  // Volver a la pantalla de inicio de sesión
+                    if (checkIfUserExists(newUsername)) {
+                        // El usuario ya existe
+                        Toast.makeText(RegisterActivity.this, "El usuario ya existe. Por favor, elija otro nombre.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // El usuario no existe, proceder con el registro
+                        saveNewUser(newUsername, newPassword);
+                        Toast.makeText(RegisterActivity.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                        finish();  // Volver a la pantalla de inicio de sesión
+                    }
                 } else {
                     Toast.makeText(RegisterActivity.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 }
@@ -40,6 +49,27 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    // Método para verificar si el nombre de usuario ya existe en el archivo users.txt
+    private boolean checkIfUserExists(String username) {
+        try {
+            FileInputStream fis = openFileInput("users.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] credentials = line.split(",");
+                if (credentials[0].equals(username)) {
+                    return true;  // El usuario ya existe
+                }
+            }
+            reader.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;  // El usuario no existe
+    }
+
+    // Método para guardar un nuevo usuario en el archivo users.txt
     private void saveNewUser(String username, String password) {
         try {
             FileOutputStream fos = openFileOutput("users.txt", MODE_APPEND);
