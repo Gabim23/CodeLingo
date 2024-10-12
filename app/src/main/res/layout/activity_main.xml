@@ -1,42 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesión"
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/usernameEditText"
+    android:gravity="center">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Usuario" />
+        android:layout_height="match_parent"
+        android:background="@drawable/back"
+        tools:context=".MainActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="130dp"
+            >
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:src="@drawable/horse"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="CodeLingo"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                />
 
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Name"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edtdesign"
+                />
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edtdesign"
+                android:inputType="textPassword"
+                />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesión" />
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btndesign"
+                android:text="Login"
+                android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrarse"
-        android:layout_marginTop="20dp" />
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Registrarse"
+                android:textAllCaps="false"
+                android:layout_gravity="right"
+                android:background="@drawable/btndesign"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Don't have an Account? Register"
+                android:layout_marginTop="20dp"
+                />
 
-</LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout></LinearLayout>
