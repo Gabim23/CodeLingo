@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="lightgray">#F5F5F5</color>  <!-- Lightgray -->
     <color name="gradient_start">#3A1C71</color> <!-- Deep purple -->
     <color name="gradient_end">#D76D77</color>   <!-- Soft pink -->
     <color name="input_background">#FFFFFF33</color> <!-- Semi-transparent white -->
@@ -14,5 +15,4 @@
     <color name="hint_color">#FFFFFFAA</color>    <!-- Light transparent text color -->
     <color name="button_normal">#FF6F61</color>   <!-- Coral color for button -->
     <color name="button_pressed">#D65A50</color>  <!-- Darker shade when pressed -->
-
 </resources>
