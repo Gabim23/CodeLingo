@@ -22,9 +22,18 @@
 
     <Button
         android:id="@+id/changePasswordButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Cambiar Contraseña"
-    android:layout_marginTop="20dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cambiar Contraseña"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/btnPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jugar"
+        android:layout_centerInParent="true"
+        android:textSize="18sp"
+        android:padding="12dp" />
 
 </LinearLayout>
