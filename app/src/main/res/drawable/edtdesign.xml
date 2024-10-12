@@ -1,0 +1,16 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color (You can also use a gradient) -->
+    <solid android:color="#F5F5F5"/> <!-- Light gray background -->
+
+    <!-- Rounded corners -->
+    <corners android:radius="16dp" />
+
+    <!-- Border (stroke) -->
+    <stroke android:width="2dp" android:color="#020879"/> <!-- Coral border color -->
+
+    <!-- Padding inside the EditText -->
+    <padding android:left="12dp" android:top="8dp" android:right="12dp" android:bottom="8dp"/>
+
+    <!-- Optional shadow-like effect -->
+    <size android:height="48dp"/>
+</shape>
