@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="50dp"
     android:gravity="top|center_horizontal"
-    android:background="@drawable/back"
+    android:background="@drawable/profile"
     tools:ignore="ExtraText">
 
 
@@ -23,50 +23,36 @@
         android:src="@drawable/ic_user" />
 
 
-    <!-- Nombre del usuario-->
-    <EditText
-        android:id="@+id/usernameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="@string/nombre"
-        android:inputType=""
-        android:textSize="18sp"
-        android:background="@drawable/edtdesign"
-        android:padding="12dp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="16dp"/>
-
-
-    <!-- Boton guardado-->
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/guardar_cambios"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btndesign"
-        android:textColor="@color/white"
-        android:padding="12dp"
-        android:layout_gravity="end"
-        tools:ignore="RtlHardcoded" />\
-
+    <!-- Correo del usuario -->
 
     <!-- Volver -->
+
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/correo_del_usuario"
+        android:background="@drawable/name_placeholder"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/goBack"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/volver"
-        android:textSize="16sp"
+        android:layout_gravity="end"
         android:layout_marginTop="16dp"
         android:background="@drawable/btndesign"
-        android:textColor="@color/white"
         android:padding="12dp"
-        android:layout_gravity="end"
+        android:text="@string/volver"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         tools:ignore="RtlHardcoded" />
-
 
 
 </LinearLayout>

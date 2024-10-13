@@ -2,9 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
+    android:gravity="end"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/profileButton"
+        style="@android:style/Widget.Holo.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_user"
+        android:src="@drawable/ic_user" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
 
     <TextView
         android:id="@+id/welcomeText"
@@ -36,4 +53,5 @@
         android:textSize="18sp"
         android:padding="12dp" />
 
+    </LinearLayout>
 </LinearLayout>

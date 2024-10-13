@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (checkUserCredentials(username, password)) {
                     Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+                    intent.putExtra("username", username);
                     startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
