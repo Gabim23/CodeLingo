@@ -7,4 +7,5 @@
     <string name="nombre">Nombre</string>
     <string name="guardar_cambios">Guardar Cambios</string>
     <string name="volver">Volver</string>
+    <string name="correo_del_usuario">Correo del Usuario</string>
 </resources>
