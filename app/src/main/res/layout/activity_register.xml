@@ -1,35 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:background="@drawable/sign_in"
+    android:padding="24dp">
+
+    <!-- Título del Login -->
+
+    <!-- Campo de correo electrónico -->
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/welcome"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-55dp"
+        android:layout_marginTop="-40dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:text="Create a new account"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registro de Usuario"
-        android:textSize="24sp" />
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="70dp"
+        android:text="Sign Up!"
+        android:textColor="#FFFFFF"
+        android:textSize="44sp"
+        android:textStyle="bold"
+        android:layout_marginStart="-70dp"
+        android:layout_marginEnd="25dp"
+
+        />
+
 
     <EditText
-        android:id="@+id/newUsernameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nuevo Usuario" />
+android:id="@+id/newUsernameEditText"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="e-mail"
+android:background="@drawable/rounded_edittext"
+        android:drawableStart="@android:drawable/sym_action_email"
+        android:drawablePadding="15dp"
+android:padding="16dp"
+android:inputType="textEmailAddress"
+android:textColor="#000000"
+    android:textColorHint="#888"
+    android:layout_marginBottom="16dp"/>
 
-    <EditText
-        android:id="@+id/newPasswordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nueva Contraseña"
-        android:inputType="textPassword" />
+    <!-- Campo de contraseña -->
+<EditText
+android:id="@+id/newPasswordEditText"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="password"
+android:background="@drawable/rounded_edittext"
+android:drawableStart="@android:drawable/ic_lock_idle_lock"
+    android:drawablePadding="15dp"
+android:padding="16dp"
+android:inputType="textPassword"
+android:textColor="#000000"
+    android:textColorHint="#888"
+    android:layout_marginBottom="16dp"
+    />
+
+    <!-- Botón de inicio de sesión -->
 
     <Button
-        android:id="@+id/registerNewUserButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrar" />
+android:id="@+id/registerNewUserButton"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Sign Up"
+android:backgroundTint="#A564D8"
+    android:textColor="#EDF2F4"
+    android:layout_marginTop="24dp"
+    android:padding="16dp"/>
+
+    <!-- Enlace para registrar una nueva cuenta -->
+<TextView
+android:id="@+id/haveAnAccountSignIn"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Have already an Account? Sing In"
+android:textColor="#D3BDB0"
+    android:textSize="14sp"
+    android:layout_marginTop="16dp"
+    android:textStyle="bold"
+    android:clickable="true"
+    android:focusable="true" />
 
 </LinearLayout>
