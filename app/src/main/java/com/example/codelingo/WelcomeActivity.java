@@ -1,6 +1,8 @@
 package com.example.codelingo;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +13,9 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button logoutButton;
     private Button changePasswordButton; // Agregar el botón para cambiar contraseña
     private Button btnPlay;
+    private Button profileButton;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         logoutButton = findViewById(R.id.logoutButton);
         changePasswordButton = findViewById(R.id.changePasswordButton); // Inicializar el botón
+        profileButton = findViewById(R.id.profileButton);
 
         // Botón de cerrar sesión
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +41,20 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        // Boton interfaz perfil de usuario
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent lastIntent = getIntent();
+                String givenUsername = lastIntent.getStringExtra("username");
+
+                Intent newIntent = new Intent(WelcomeActivity.this, UserProfileActivity.class);
+                newIntent.putExtra("username", givenUsername);
+                startActivity(newIntent);
                 finish();
             }
         });
