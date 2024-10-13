@@ -1,10 +1,13 @@
 package com.example.codelingo;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -26,6 +29,9 @@ public class RegisterActivity extends AppCompatActivity {
         newUsernameEditText = findViewById(R.id.newUsernameEditText);
         newPasswordEditText = findViewById(R.id.newPasswordEditText);
         registerNewUserButton = findViewById(R.id.registerNewUserButton);
+        TextView signInTextView = findViewById(R.id.haveAnAccountSignIn);
+
+
 
         registerNewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +52,16 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(RegisterActivity.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        //si tiene una cuenta clica en iniciar sesion
+        signInTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Iniciar la nueva actividad SignInActivity
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -88,4 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
         String passwordPattern = "^(?=.*[A-Z])(?=.*[@#$%^&+=?¿!¡]).{6,}$";
         return Pattern.matches(passwordPattern, password);
     }
+
+
 }
