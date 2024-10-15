@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,25 +16,26 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserProfileActivity extends AppCompatActivity{
+public class UserProfileActivity extends AppCompatActivity {
 
     private EditText userDescriptionEdit;
     private Button logoutButton;
     private Button changePasswordButton; // Agregar el botón para cambiar contraseña
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         userDescriptionEdit = findViewById(R.id.user_descriptionEdit); // EditText para la descripción
         TextView userEmailTextView = findViewById(R.id.user_email); // TextView para el correo
-        //Inicializacion
+
+        // Inicialización
         Button goBack = findViewById(R.id.goBack);
         Button saveButton = findViewById(R.id.save_button); // Asumimos que hay un botón save en el layout
 
         // Recibir el nombre de usuario desde el Intent
-        Intent intent = getIntent();
-        String givenUsername = intent.getStringExtra("username");
+        Intent receivedIntent = getIntent(); // Cambiado el nombre de 'intent' a 'receivedIntent'
+        String givenUsername = receivedIntent.getStringExtra("username");
         String email = getEmailForUser(givenUsername);
         String description = getDescForUser(givenUsername);
 
@@ -57,10 +59,10 @@ public class UserProfileActivity extends AppCompatActivity{
             }
         });
 
-        //Volver al menu Welcome
+        // Volver al menú Welcome
         goBack.setOnClickListener(v -> {
             Intent intent2 = new Intent(UserProfileActivity.this, WelcomeActivity.class);
-             intent2.putExtra("username", givenUsername);
+            intent2.putExtra("username", givenUsername);
             startActivity(intent2);
             finish();
         });
@@ -69,24 +71,18 @@ public class UserProfileActivity extends AppCompatActivity{
         changePasswordButton = findViewById(R.id.changePasswordButton); // Inicializar el botón
 
         // Botón de cerrar sesión
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        logoutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         // Botón para cambiar contraseña
-        changePasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
-                startActivity(intent);
-            }
+        changePasswordButton.setOnClickListener(v -> {
+            Intent changePasswordIntent = new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
+            changePasswordIntent.putExtra("username", givenUsername); // Pasar el nombre de usuario actual
+            startActivity(changePasswordIntent);
         });
-
     }
 
     private String getEmailForUser(String username) {
@@ -96,7 +92,7 @@ public class UserProfileActivity extends AppCompatActivity{
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] credentials = line.split(",");
-                if (credentials.length >=2 && credentials[0].equals(username)) {
+                if (credentials.length >= 2 && credentials[0].equals(username)) {
                     // Retornar el correo si coincide el nombre de usuario (correo es el primer campo)
                     return credentials[0];
                 }
@@ -155,9 +151,6 @@ public class UserProfileActivity extends AppCompatActivity{
                 lines.add(line); // Agregar la línea modificada o no a la lista
             }
 
-
-            // Leer todas las líneas y modificarlas si corresponde
-
             reader.close();
             fis.close();
 
@@ -175,7 +168,4 @@ public class UserProfileActivity extends AppCompatActivity{
         }
         return false;
     }
-
-
-
 }
