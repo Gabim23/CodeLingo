@@ -10,8 +10,6 @@ import android.widget.Button;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private Button logoutButton;
-    private Button changePasswordButton; // Agregar el botón para cambiar contraseña
     private Button btnPlay;
     private Button profileButton;
 
@@ -31,19 +29,8 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        logoutButton = findViewById(R.id.logoutButton);
-        changePasswordButton = findViewById(R.id.changePasswordButton); // Inicializar el botón
         profileButton = findViewById(R.id.profileButton);
 
-        // Botón de cerrar sesión
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         // Boton interfaz perfil de usuario
         profileButton.setOnClickListener(new View.OnClickListener() {
@@ -56,15 +43,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 newIntent.putExtra("username", givenUsername);
                 startActivity(newIntent);
                 finish();
-            }
-        });
-
-        // Botón para cambiar contraseña
-        changePasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, ChangePasswordActivity.class);
-                startActivity(intent);
             }
         });
     }
