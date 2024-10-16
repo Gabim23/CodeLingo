@@ -19,27 +19,27 @@
         android:layout_marginTop="-40dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="20dp"
-        android:text="Create a new account"
+        android:text="Crea una cuenta nueva"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"
         android:textSize="17sp" />
+
 
     <TextView
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="-59dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="70dp"
-        android:text="Sign Up!"
+        android:text="Regístrate!"
         android:textColor="#FFFFFF"
-        android:textSize="44sp"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:layout_marginStart="-70dp"
-        android:layout_marginEnd="25dp"
 
         />
-
 
     <EditText
 android:id="@+id/newUsernameEditText"
