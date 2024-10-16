@@ -40,8 +40,10 @@
                 android:id="@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="User Name"
-                android:textSize="12sp"
+                android:hint="Usuario"
+                android:textSize="14sp"
+                android:drawablePadding="15dp"
+                android:drawableStart="@drawable/ic_user"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/edtdesign"
                 />
@@ -49,9 +51,11 @@
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:textSize="12sp"
+                android:hint="Contraseña"
+                android:textSize="14sp"
                 android:layout_marginTop="5dp"
+                android:drawableStart="@android:drawable/ic_secure"
+                android:drawablePadding="15dp"
                 android:background="@drawable/edtdesign"
                 android:inputType="textPassword"
                 />
@@ -63,7 +67,7 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btndesign"
-                android:text="Login"
+                android:text="Iniciar sesión"
                 android:textAllCaps="false" />
 
             <Button
@@ -79,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Don't have an Account? Register"
+                android:text="¿No tienes cuenta? Regístrate"
                 android:layout_marginTop="20dp"
                 />
 
