@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.regex.Pattern;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -41,6 +42,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 String newPassword = newPasswordEditText.getText().toString();
 
                 if (!oldPassword.isEmpty() && !newPassword.isEmpty()) {
+                    // Verifica si la nueva contraseña cumple con las restricciones
+                    if (!isValidPassword(newPassword)) {
+                        Toast.makeText(ChangePasswordActivity.this, "La contraseña debe contener al menos una letra mayúscula y un carácter especial.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     if (changeUserPassword(currentUsername, oldPassword, newPassword)) {
                         Toast.makeText(ChangePasswordActivity.this, "Contraseña cambiada con éxito", Toast.LENGTH_SHORT).show();
                         finish();  // Finaliza la actividad
@@ -52,6 +59,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // Método para validar que la contraseña contenga al menos una mayúscula y un carácter especial
+    private boolean isValidPassword(String password) {
+        // Expresión regular que requiere al menos una letra mayúscula y un carácter especial
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[@#$%^&+=?¿!¡]).{6,}$";
+        return Pattern.matches(passwordPattern, password);
     }
 
     private boolean changeUserPassword(String username, String oldPassword, String newPassword) {
