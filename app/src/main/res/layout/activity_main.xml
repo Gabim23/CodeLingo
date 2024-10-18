@@ -22,9 +22,9 @@
             android:layout_marginTop="130dp"
             >
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="100dp"
-                android:src="@drawable/horse"
+                android:layout_width="140dp"
+                android:layout_height="90dp"
+                android:src="@drawable/logo_sinfondo"
                 android:layout_gravity="center"
                 />
             <TextView
@@ -62,7 +62,7 @@
 
             <Button
                 android:id="@+id/loginButton"
-                android:layout_width="200dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
@@ -72,7 +72,7 @@
 
             <Button
                 android:id="@+id/registerButton"
-                android:layout_width="200dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="Registrarse"
                 android:textAllCaps="false"
