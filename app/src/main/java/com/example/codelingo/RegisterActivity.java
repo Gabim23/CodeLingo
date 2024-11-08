@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void saveNewUser(String username, String password) {
         try {
             FileOutputStream fos = openFileOutput("users.txt", MODE_APPEND);
-            String userData = username + "," + password + "\n";
+            String userData = username + "," + password + ",0\n"; // Incluye el puntaje inicial de 0
             fos.write(userData.getBytes());
             fos.close();
         } catch (Exception e) {
