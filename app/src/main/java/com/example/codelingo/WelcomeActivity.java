@@ -12,6 +12,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private Button btnPlay;
     private Button profileButton;
+    private Button viewRankingButton;  // Declaramos el botón de ranking
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -29,10 +30,8 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+        // Encuentra el botón de perfil
         profileButton = findViewById(R.id.profileButton);
-
-
-        // Boton interfaz perfil de usuario
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +41,16 @@ public class WelcomeActivity extends AppCompatActivity {
                 Intent newIntent = new Intent(WelcomeActivity.this, UserProfileActivity.class);
                 newIntent.putExtra("username", givenUsername);
                 startActivity(newIntent);
-                finish();
+            }
+        });
+
+        // Encuentra el botón de ver ranking
+        viewRankingButton = findViewById(R.id.viewRankingButton);
+        viewRankingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeActivity.this, RankingActivity.class);
+                startActivity(intent);
             }
         });
     }
