@@ -25,6 +25,8 @@
         android:layout_marginEnd="20dp"
         android:text="Perfil"
         android:drawableStart="@drawable/ic_user"/>
+
+
     <!-- Contenedor para el contenido principal -->
     <LinearLayout
         android:layout_width="wrap_content"
