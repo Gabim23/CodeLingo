@@ -1,0 +1,20 @@
+<!-- res/drawable/background_gradient.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo degradado -->
+    <item>
+        <shape>
+            <gradient
+                android:startColor="#CBABFF"
+                android:endColor="#FFFFFF"
+            android:angle="45" />
+        </shape>
+    </item>
+
+    <!-- Patrón sutil de puntos -->
+    <item>
+        <bitmap
+            android:src="@drawable/pattern_dots"
+            android:tileMode="repeat"
+            android:alpha="0.1" /> <!-- Transparencia para suavizar el patrón -->
+    </item>
+</layer-list>

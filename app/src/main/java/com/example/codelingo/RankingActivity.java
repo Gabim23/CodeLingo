@@ -1,6 +1,7 @@
 package com.example.codelingo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,16 +24,14 @@ public class RankingActivity extends AppCompatActivity {
 
         rankingListView = findViewById(R.id.rankingListView);
 
-        List<String[]> rankedUsers = getRankedUsers();
-        List<String> displayList = new ArrayList<>();
+        List<String[]> rankedUsers = getRankedUsers();  // Obtiene la lista de usuarios ordenados
 
-        for (String[] user : rankedUsers) {
-            displayList.add("Usuario: " + user[0] + " - Puntaje: " + user[2]);
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, displayList);
+        // Configura el adaptador personalizado
+        RankingAdapter adapter = new RankingAdapter(this, rankedUsers);
         rankingListView.setAdapter(adapter);
     }
+
+
 
     // Método para obtener y ordenar los usuarios por puntaje
     private List<String[]> getRankedUsers() {
@@ -44,7 +43,13 @@ public class RankingActivity extends AppCompatActivity {
 
             while ((line = reader.readLine()) != null) {
                 String[] userData = line.split(",");
-                users.add(userData);  // userData[0]: username, userData[1]: password, userData[2]: score
+                // Asegúrate de que userData tiene al menos 3 elementos (username, password, score)
+                if (userData.length >= 3) {
+                    users.add(userData);  // userData[0]: username, userData[1]: password, userData[2]: score
+                } else {
+                    // Opcional: log o mensaje si la línea no cumple con el formato
+                    Log.e("RankingActivity", "Formato incorrecto en la línea: " + line);
+                }
             }
             reader.close();
             fis.close();
@@ -57,4 +62,5 @@ public class RankingActivity extends AppCompatActivity {
         }
         return users;
     }
+
 }
