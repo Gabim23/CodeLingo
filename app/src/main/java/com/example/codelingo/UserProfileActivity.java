@@ -2,6 +2,7 @@ package com.example.codelingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,56 +34,63 @@ public class UserProfileActivity extends AppCompatActivity {
         Button goBack = findViewById(R.id.goBack);
         Button saveButton = findViewById(R.id.save_button); // Asumimos que hay un botón save en el layout
 
-        // Recibir el nombre de usuario desde el Intent
-        Intent receivedIntent = getIntent(); // Cambiado el nombre de 'intent' a 'receivedIntent'
-        String givenUsername = receivedIntent.getStringExtra("username");
-        String email = getEmailForUser(givenUsername);
-        String description = getDescForUser(givenUsername);
+        // Recuperar el nombre de usuario desde SharedPreferences
+        SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String givenUsername = sharedPref.getString("username", null);
 
-        if (email != null) {
-            // Mostrar el correo en el TextView
-            userEmailTextView.setText(email);
-        } else {
-            Toast.makeText(UserProfileActivity.this, "No se encontró el correo del usuario", Toast.LENGTH_SHORT).show();
-        }
+        if (givenUsername != null) {
+            String email = getEmailForUser(givenUsername);
+            String description = getDescForUser(givenUsername);
 
-        if (description != null) {
-            userDescriptionEdit.setText(description);
-        }
-
-        saveButton.setOnClickListener(v -> {
-            String newDescription = userDescriptionEdit.getText().toString();
-            if (saveDescForUser(givenUsername, newDescription)) {
-                Toast.makeText(UserProfileActivity.this, "Descripción guardada con éxito", Toast.LENGTH_SHORT).show();
+            if (email != null) {
+                // Mostrar el correo en el TextView
+                userEmailTextView.setText(email);
             } else {
-                Toast.makeText(UserProfileActivity.this, "Error al guardar la descripción", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserProfileActivity.this, "No se encontró el correo del usuario", Toast.LENGTH_SHORT).show();
             }
-        });
 
-        // Volver al menú Welcome
-        goBack.setOnClickListener(v -> {
-            Intent intent2 = new Intent(UserProfileActivity.this, WelcomeActivity.class);
-            intent2.putExtra("username", givenUsername);
-            startActivity(intent2);
-            finish();
-        });
+            if (description != null) {
+                userDescriptionEdit.setText(description);
+            }
 
-        logoutButton = findViewById(R.id.logoutButton);
-        changePasswordButton = findViewById(R.id.changePasswordButton); // Inicializar el botón
+            saveButton.setOnClickListener(v -> {
+                String newDescription = userDescriptionEdit.getText().toString();
+                if (saveDescForUser(givenUsername, newDescription)) {
+                    Toast.makeText(UserProfileActivity.this, "Descripción guardada con éxito", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(UserProfileActivity.this, "Error al guardar la descripción", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-        // Botón de cerrar sesión
-        logoutButton.setOnClickListener(v -> {
+            // Volver al menú Welcome
+            goBack.setOnClickListener(v -> {
+                Intent intent2 = new Intent(UserProfileActivity.this, WelcomeActivity.class);
+                startActivity(intent2);
+                finish();
+            });
+
+            logoutButton = findViewById(R.id.logoutButton);
+            changePasswordButton = findViewById(R.id.changePasswordButton); // Inicializar el botón
+
+            // Botón de cerrar sesión
+            logoutButton.setOnClickListener(v -> {
+                Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            });
+
+            // Botón para cambiar contraseña
+            changePasswordButton.setOnClickListener(v -> {
+                Intent changePasswordIntent = new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
+                changePasswordIntent.putExtra("username", givenUsername); // Pasar el nombre de usuario actual
+                startActivity(changePasswordIntent);
+            });
+        } else {
+            // Si no se encuentra el nombre de usuario en SharedPreferences, redirigir al login
             Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        });
-
-        // Botón para cambiar contraseña
-        changePasswordButton.setOnClickListener(v -> {
-            Intent changePasswordIntent = new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
-            changePasswordIntent.putExtra("username", givenUsername); // Pasar el nombre de usuario actual
-            startActivity(changePasswordIntent);
-        });
+        }
     }
 
     private String getEmailForUser(String username) {

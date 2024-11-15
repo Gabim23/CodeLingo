@@ -2,6 +2,7 @@ package com.example.codelingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
-        deleteAllUsersButton = findViewById(R.id.deleteAllUsersButton); // Referencia al nuevo botón
+        deleteAllUsersButton = findViewById(R.id.deleteAllUsersButton);
 
         // Botón de iniciar sesión
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -39,10 +40,17 @@ public class MainActivity extends AppCompatActivity {
                 // Verificar credenciales y obtener la puntuación
                 int score = checkUserCredentials(username, password);
                 if (score != -1) {  // -1 indica que las credenciales son incorrectas
+                    // Guardar el nombre de usuario en SharedPreferences
+                    SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("username", username);
+                    editor.putInt("score", score); // Guardar la puntuación
+                    editor.apply();
+
+                    // Iniciar la actividad de bienvenida
                     Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("score", score); // Pasar la puntuación al WelcomeActivity
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(MainActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
                 }

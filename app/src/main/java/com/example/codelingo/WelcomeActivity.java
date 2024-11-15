@@ -1,9 +1,9 @@
 package com.example.codelingo;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,12 +35,20 @@ public class WelcomeActivity extends AppCompatActivity {
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent lastIntent = getIntent();
-                String givenUsername = lastIntent.getStringExtra("username");
+                // Recuperamos el nombre de usuario desde SharedPreferences
+                SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                String givenUsername = sharedPref.getString("username", null);
 
-                Intent newIntent = new Intent(WelcomeActivity.this, UserProfileActivity.class);
-                newIntent.putExtra("username", givenUsername);
-                startActivity(newIntent);
+                if (givenUsername != null) {
+                    Intent newIntent = new Intent(WelcomeActivity.this, UserProfileActivity.class);
+                    newIntent.putExtra("username", givenUsername);
+                    startActivity(newIntent);
+                } else {
+                    // Si no se encuentra el nombre de usuario, redirigimos al login
+                    Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
