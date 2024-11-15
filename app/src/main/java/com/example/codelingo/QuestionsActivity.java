@@ -29,25 +29,26 @@ public class QuestionsActivity extends AppCompatActivity {
         tvFeedback = findViewById(R.id.tvFeedback);
         tvScore = findViewById(R.id.tvScore);
         currentLevel = getIntent().getIntExtra("CURRENT_LEVEL", 0);
-        questionManager = new QuestionManager();
-        loadCurrentQuestion(); // Carga la primera pregunta
+        questionManager = new QuestionManager(currentLevel);
+        loadCurrentQuestion();
         TextView tvQuestion = findViewById(R.id.tvQuestion);
         Button btnOption1 = findViewById(R.id.btnOption1);
         Button btnOption2 = findViewById(R.id.btnOption2);
         Button btnOption3 = findViewById(R.id.btnOption3);
         Button btnOption4 = findViewById(R.id.btnOption4);
-        levelManager = new LevelManager(this, tvQuestion, tvScore, btnOption1, btnOption2, btnOption3, btnOption4, btnContinue);
+        LevelManager levelManager = new LevelManager(this, currentLevel, tvQuestion, tvScore, btnOption1, btnOption2, btnOption3, btnOption4, btnContinue);
         setOptionButtonListeners(btnOption1, btnOption2, btnOption3, btnOption4);
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveLevelProgress(currentLevel);
-                Intent intent = new Intent(QuestionsActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(QuestionsActivity.this, LevelsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             }
         });
+
         btnContinue.setVisibility(View.GONE);
     }
 
@@ -92,7 +93,7 @@ public class QuestionsActivity extends AppCompatActivity {
             correctAnswers++;
             showFeedback(true, "¡Excelente!");
         } else {
-            showFeedback(false, "Incorrecto: respuesta correcta es " + correctAnswer);
+            showFeedback(false, "Incorrecto: La respuesta correcta es " + correctAnswer);
         }
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -121,7 +122,7 @@ public class QuestionsActivity extends AppCompatActivity {
         findViewById(R.id.btnOption2).setVisibility(View.GONE);
         findViewById(R.id.btnOption3).setVisibility(View.GONE);
         findViewById(R.id.btnOption4).setVisibility(View.GONE);
-        tvScore.setText("Puntuación total: " + correctAnswers + " de " + (questionManager.getTotalQuestions()-1));
+        tvScore.setText("Puntuación total: " + correctAnswers + " de " + (questionManager.getTotalQuestions() - 1));
         tvScore.setVisibility(View.VISIBLE);
         btnContinue.setVisibility(View.VISIBLE);
     }

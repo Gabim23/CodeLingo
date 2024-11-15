@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +35,7 @@ public class LevelsAdapter extends RecyclerView.Adapter<LevelsAdapter.LevelViewH
         String level = levels[position];
         holder.tvLevel.setText(level);
         GradientDrawable background = new GradientDrawable();
-        background.setCornerRadius(16f); // Esquinas redondeadas
+        background.setCornerRadius(16f);
         if (level.contains("Bloqueado")) {
             background.setColor(ContextCompat.getColor(context, R.color.grey));
         } else {
@@ -64,4 +63,5 @@ public class LevelsAdapter extends RecyclerView.Adapter<LevelsAdapter.LevelViewH
             tvLevel = itemView.findViewById(R.id.tvLevel);
         }
     }
+
 }

@@ -17,7 +17,7 @@ public class LevelManager {
     private Button btnOption1, btnOption2, btnOption3, btnOption4, btnContinue;
     private Context context;
 
-    public LevelManager(Context context, TextView tvQuestion, TextView tvScore,
+    public LevelManager(Context context, int level, TextView tvQuestion, TextView tvScore,
                         Button btnOption1, Button btnOption2, Button btnOption3, Button btnOption4, Button btnContinue) {
         this.context = context;
         this.tvQuestion = tvQuestion;
@@ -27,7 +27,7 @@ public class LevelManager {
         this.btnOption3 = btnOption3;
         this.btnOption4 = btnOption4;
         this.btnContinue = btnContinue;
-        questionManager = new QuestionManager();
+        questionManager = new QuestionManager(level);
         scoreManager = new ScoreManager();
         setupListeners();
         loadQuestion();
@@ -70,14 +70,10 @@ public class LevelManager {
             btnOption2.setTag(1);
             btnOption3.setTag(2);
             btnOption4.setTag(3);
-            btnOption1.setVisibility(View.VISIBLE);
-            btnOption2.setVisibility(View.VISIBLE);
-            btnOption3.setVisibility(View.VISIBLE);
-            btnOption4.setVisibility(View.VISIBLE);
             btnContinue.setVisibility(View.GONE);
             tvScore.setVisibility(View.GONE);
         } else {
-            saveLevelProgress(1);
+            saveLevelProgress(questionManager.getLevel());
             tvQuestion.setVisibility(View.GONE);
             btnOption1.setVisibility(View.GONE);
             btnOption2.setVisibility(View.GONE);
@@ -85,6 +81,16 @@ public class LevelManager {
             btnOption4.setVisibility(View.GONE);
             tvScore.setText("Puntuación final: " + scoreManager.getScore());
             btnContinue.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void saveLevelProgress(int currentLevel) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("LevelPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int nextLevel = currentLevel + 1;
+        if (nextLevel <= 2) {
+            editor.putBoolean("level_" + nextLevel, true);
+            editor.apply();
         }
     }
 
@@ -109,6 +115,7 @@ public class LevelManager {
                 questionManager.moveToNextQuestion();
                 loadQuestion();
             } else {
+                saveLevelProgress(questionManager.getLevel());
                 tvScore.setText("Puntuación final: " + scoreManager.getScore());
                 Toast.makeText(context, getCongratulatoryMessage(scoreManager.getScore()), Toast.LENGTH_LONG).show();
                 tvQuestion.setVisibility(View.GONE);
@@ -119,13 +126,6 @@ public class LevelManager {
                 btnContinue.setVisibility(View.VISIBLE);
             }
         }
-    }
-
-    private void saveLevelProgress(int level) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("LevelPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("level_" + level, true);
-        editor.apply();
     }
 
 }
