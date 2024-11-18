@@ -1,4 +1,5 @@
-package com.example.codelingo;// RankingAdapter.java
+package com.example.codelingo;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +33,8 @@ public class RankingAdapter extends ArrayAdapter<String[]> {
         // Configura el contenido del elemento
         rankingNumber.setText(String.valueOf(position + 1));  // Número de ranking
         userName.setText(user[0]);  // Nombre del usuario
-        userScore.setText("Puntos: " + user[2]);  // Puntaje del usuario
+        userScore.setText("Puntos: " + user[3]);  // Puntaje del usuario, ahora está en el índice [3]
 
         return convertView;
     }
 }
-

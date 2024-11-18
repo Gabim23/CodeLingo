@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
@@ -31,8 +30,6 @@ public class RankingActivity extends AppCompatActivity {
         rankingListView.setAdapter(adapter);
     }
 
-
-
     // Método para obtener y ordenar los usuarios por puntaje
     private List<String[]> getRankedUsers() {
         List<String[]> users = new ArrayList<>();
@@ -43,24 +40,22 @@ public class RankingActivity extends AppCompatActivity {
 
             while ((line = reader.readLine()) != null) {
                 String[] userData = line.split(",");
-                // Asegúrate de que userData tiene al menos 3 elementos (username, password, score)
-                if (userData.length >= 3) {
+                // Asegúrate de que userData tiene al menos 4 elementos (username, password, score)
+                if (userData.length >= 4) {  // Cambié el valor a 4 para tener en cuenta el índice [3]
                     users.add(userData);  // userData[0]: username, userData[1]: password, userData[2]: score
                 } else {
-                    // Opcional: log o mensaje si la línea no cumple con el formato
                     Log.e("RankingActivity", "Formato incorrecto en la línea: " + line);
                 }
             }
             reader.close();
             fis.close();
 
-            // Ordena los usuarios por puntaje en orden descendente
-            Collections.sort(users, (a, b) -> Integer.parseInt(b[2]) - Integer.parseInt(a[2]));
+            // Ordena los usuarios por puntaje en orden descendente usando el índice [3] para el puntaje
+            Collections.sort(users, (a, b) -> Integer.parseInt(b[3]) - Integer.parseInt(a[3]));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return users;
     }
-
 }
