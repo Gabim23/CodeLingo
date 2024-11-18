@@ -9,10 +9,7 @@
     android:background="@drawable/profile"
     tools:ignore="ExtraText">
 
-
     <!-- Imagen de perfil -->
-    <!-- Vector perfil -> baseline_person_24-->
-
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="90dp"
@@ -23,11 +20,7 @@
         android:contentDescription="@string/imagen_de_perfil"
         android:src="@drawable/ic_user" />
 
-
     <!-- Correo del usuario -->
-
-    <!-- Volver -->
-
     <TextView
         android:id="@+id/user_email"
         android:layout_width="wrap_content"
@@ -42,6 +35,22 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <!-- Puntaje del usuario -->
+    <TextView
+        android:id="@+id/user_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="Puntaje: N/A"
+        android:background="@drawable/name_placeholder"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Descripción del usuario -->
     <TextView
         android:id="@+id/user_email2"
         android:layout_width="match_parent"
@@ -117,6 +126,5 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         tools:ignore="RtlHardcoded" />
-
 
 </LinearLayout>

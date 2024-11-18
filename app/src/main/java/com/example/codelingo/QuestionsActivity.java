@@ -10,6 +10,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuestionsActivity extends AppCompatActivity {
 
     private Button btnContinue;
@@ -42,6 +49,7 @@ public class QuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveLevelProgress(currentLevel);
+                updateUserScore();
                 Intent intent = new Intent(QuestionsActivity.this, LevelsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -135,4 +143,71 @@ public class QuestionsActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    private void updateUserScore() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+
+        if (username != null) {
+            // Obtener el puntaje actual del usuario
+            int currentScore = getCurrentUserScore(username);
+
+            // Sumar el puntaje actual con la puntuación del nivel
+            int newScore = currentScore + correctAnswers;
+
+            // Guardar el nuevo puntaje
+            saveUserScore(username, newScore);
+        }
+    }
+
+    private int getCurrentUserScore(String username) {
+        try {
+            FileInputStream fis = openFileInput("users.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] credentials = line.split(",");
+                if (credentials[0].equals(username)) {
+                    return Integer.parseInt(credentials[3]);
+                }
+            }
+            reader.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    private void saveUserScore(String username, int newScore) {
+        try {
+            FileInputStream fis = openFileInput("users.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            List<String> lines = new ArrayList<>();
+            String line;
+            boolean found = false;
+
+            while ((line = reader.readLine()) != null) {
+                String[] credentials = line.split(",");
+                if (credentials[0].equals(username)) {
+                    credentials[3] = String.valueOf(newScore);
+                    line = String.join(",", credentials);
+                    found = true;
+                }
+                lines.add(line);
+            }
+
+            reader.close();
+            fis.close();
+
+            if (found) {
+                FileOutputStream fos = openFileOutput("users.txt", MODE_PRIVATE);
+                for (String l : lines) {
+                    fos.write((l + "\n").getBytes());
+                }
+                fos.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

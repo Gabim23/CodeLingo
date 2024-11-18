@@ -31,8 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
         registerNewUserButton = findViewById(R.id.registerNewUserButton);
         TextView signInTextView = findViewById(R.id.haveAnAccountSignIn);
 
-
-
         registerNewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void saveNewUser(String username, String password) {
         try {
             FileOutputStream fos = openFileOutput("users.txt", MODE_APPEND);
-            String userData = username + "," + password + ",0\n"; // Incluye el puntaje inicial de 0
+            String userData = username + "," + password + ",0,0\n"; // Añadido el puntaje al final (inicializado en 0)
             fos.write(userData.getBytes());
             fos.close();
         } catch (Exception e) {
@@ -104,6 +102,4 @@ public class RegisterActivity extends AppCompatActivity {
         String passwordPattern = "^(?=.*[A-Z])(?=.*[@#$%^&+=?¿!¡]).{6,}$";
         return Pattern.matches(passwordPattern, password);
     }
-
-
 }
