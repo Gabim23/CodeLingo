@@ -73,21 +73,6 @@ public class UserProfileActivity extends AppCompatActivity {
                 startActivity(intent2);
                 finish();
             });
-
-            logoutButton = findViewById(R.id.logoutButton);
-            changePasswordButton = findViewById(R.id.changePasswordButton);
-
-            logoutButton.setOnClickListener(v -> {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            });
-
-            changePasswordButton.setOnClickListener(v -> {
-                Intent changePasswordIntent = new Intent(this, ChangePasswordActivity.class);
-                changePasswordIntent.putExtra("username", givenUsername);
-                startActivity(changePasswordIntent);
-            });
         } else {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
