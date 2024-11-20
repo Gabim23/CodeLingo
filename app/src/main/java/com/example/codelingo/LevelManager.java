@@ -106,18 +106,22 @@ public class LevelManager {
         Question currentQuestion = questionManager.getCurrentQuestion();
         if (currentQuestion != null) {
             if (currentQuestion.getCorrectAnswerIndex() == selectedAnswer) {
-                scoreManager.incrementScore();
+                scoreManager.incrementScore(); // Aumentar la puntuación del nivel
                 Toast.makeText(context, "¡Correcto!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, "Incorrecto", Toast.LENGTH_SHORT).show();
             }
+
             if (questionManager.hasNextQuestion()) {
                 questionManager.moveToNextQuestion();
                 loadQuestion();
             } else {
+                // Guardar progreso y actualizar la puntuación del usuario al finalizar el nivel
                 saveLevelProgress(questionManager.getLevel());
+                updateUserScore(scoreManager.getScore()); // Actualizar la puntuación del usuario
                 tvScore.setText("Puntuación final: " + scoreManager.getScore());
                 Toast.makeText(context, getCongratulatoryMessage(scoreManager.getScore()), Toast.LENGTH_LONG).show();
+
                 tvQuestion.setVisibility(View.GONE);
                 btnOption1.setVisibility(View.GONE);
                 btnOption2.setVisibility(View.GONE);
@@ -127,5 +131,25 @@ public class LevelManager {
             }
         }
     }
+
+    private void updateUserScore(int score) {
+        // Obtener SharedPreferences donde se guarda el puntaje del usuario
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Recuperar el puntaje actual del usuario
+        int currentScore = sharedPreferences.getInt("user_score", 0);
+
+        // Sumar la puntuación del nivel al puntaje total del usuario
+        int newScore = currentScore + score;
+
+        // Guardar el nuevo puntaje en SharedPreferences
+        editor.putInt("user_score", newScore);
+        editor.apply();
+
+        // Opcional: Puedes mostrar el puntaje actualizado inmediatamente o en la siguiente actividad
+        Toast.makeText(context, "Puntaje total actualizado: " + newScore, Toast.LENGTH_SHORT).show();
+    }
+
 
 }
