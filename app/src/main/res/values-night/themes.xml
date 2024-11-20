@@ -1,6 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Theme.CodeLingo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <!-- Black background -->
+        <item name="android:textColor">@color/textFieldTextColor</item>             <!-- White text -->
+        <item name="buttonStyle">@style/ButtonStyle</item>
+</style>
 
+    <!-- Button Style -->
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@color/button_normal</item>
+        <item name="android:state_pressed">@color/button_pressed</item>
     </style>
 </resources>

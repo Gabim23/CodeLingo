@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_500">#3700B3</color>        <!-- Darker purple for night -->
+    <color name="purple_700">#1E0633</color>        <!-- Deep purple -->
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#03DAC5</color>          <!-- Keep it consistent -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gradient_start">#2C1B5E</color>    <!-- Darker purple for gradient -->
+    <color name="gradient_end">#A04663</color>      <!-- Slightly darker pink -->
+    <color name="input_background">#33333333</color> <!-- Dark transparent grey -->
+    <color name="input_border">#55555588</color>    <!-- Slightly darker border -->
+    <color name="hint_color">#AAAAAA</color>        <!-- Light grey hint for dark theme -->
+    <color name="button_normal">#FF6F61</color>     <!-- Coral color remains consistent -->
+    <color name="button_pressed">#D65A50</color>
+    <color name="colorPrimary">#673AB7</color>      <!-- Purple remains same -->
+    <color name="colorPrimaryDark">#3700B3</color>  <!-- Adjusted to match dark mode -->
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorBackground">#000000</color>   <!-- Completely black background -->
+    <color name="grey">#AAAAAA</color>              <!-- Light grey for dark mode -->
+    <color name="textColor">#FFFFFF</color>         <!-- White text -->
+    <color name="textFieldTextColor">#000000</color> <!-- Texto negro -->
+    <color name="hint">#000000</color> <!-- Texto negro -->
+
+</resources>
