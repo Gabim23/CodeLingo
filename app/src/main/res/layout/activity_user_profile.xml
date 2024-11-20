@@ -9,6 +9,8 @@
     android:background="@drawable/profile"
     tools:ignore="ExtraText">
 
+
+
     <!-- Imagen de perfil -->
     <ImageView
         android:id="@+id/profile_image"
@@ -20,50 +22,41 @@
         android:contentDescription="@string/imagen_de_perfil"
         android:src="@drawable/ic_user" />
 
-    <!-- Correo del usuario -->
     <TextView
-        android:id="@+id/user_email"
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="bottom"
-        android:text="@string/correo_del_usuario"
-        android:background="@drawable/name_placeholder"
-        android:padding="5dp"
-        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:text="Nombre de Usuario"
         android:textSize="20sp"
-        android:textStyle="bold" />
+    android:textColor="#000000"
+    android:textStyle="bold"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center"
+    android:layout_marginBottom="8dp"
+    android:padding="8dp"
+    android:background="@drawable/rounded_border"
+    android:visibility="visible" />
 
-    <!-- Puntaje del usuario -->
+
     <TextView
         android:id="@+id/user_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="Puntaje: N/A"
-        android:background="@drawable/name_placeholder"
-        android:padding="5dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="16dp"
+        android:text="Puntaje: 0"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:background="@drawable/rounded_border"
+        android:visibility="visible" />
+
 
     <!-- Descripción del usuario -->
-    <TextView
-        android:id="@+id/user_email2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="15dp"
-        android:gravity="start"
-        android:text="@string/descripcion"
-        android:padding="5dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
     <EditText
         android:id="@+id/user_descriptionEdit"
         android:layout_width="match_parent"
@@ -72,6 +65,7 @@
         android:inputType="textMultiLine"
         android:padding="6dp"/>
 
+    <!-- Botón para guardar cambios -->
     <Button
         android:id="@+id/save_button"
         android:layout_width="200dp"
@@ -86,6 +80,7 @@
         android:textSize="16sp"
         tools:ignore="RtlHardcoded" />
 
+    <!-- Botón para volver -->
     <Button
         android:id="@+id/goBack"
         android:layout_width="200dp"

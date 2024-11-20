@@ -76,7 +76,7 @@ public class TestLevelActivity extends AppCompatActivity {
         } else {
             // Cuando todas las preguntas han sido respondidas
             Toast.makeText(TestLevelActivity.this, "Prueba completada. Puntuación: " + score, Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(TestLevelActivity.this, MainActivity.class); // Redirigir a la pantalla de inicio de sesión
+            Intent intent = new Intent(TestLevelActivity.this, WelcomeActivity.class); // Redirigir a la pantalla de inicio de sesión
             startActivity(intent);
             finish();
         }

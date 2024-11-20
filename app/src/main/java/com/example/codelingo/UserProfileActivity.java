@@ -28,37 +28,43 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        // Obtener las referencias de los elementos de la interfaz
         userDescriptionEdit = findViewById(R.id.user_descriptionEdit);
-        TextView userEmailTextView = findViewById(R.id.user_email);
         TextView userScoreTextView = findViewById(R.id.user_score); // TextView para el puntaje
+        TextView userNameTextView = findViewById(R.id.user_name); // Nuevo TextView para mostrar el nombre
 
         Button goBack = findViewById(R.id.goBack);
         Button saveButton = findViewById(R.id.save_button);
 
+        // Obtener el nombre de usuario desde SharedPreferences
         SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String givenUsername = sharedPref.getString("username", null);
 
         if (givenUsername != null) {
+            // Si se ha encontrado un nombre de usuario, obtener los detalles del usuario
             String email = getEmailForUser(givenUsername);
             String description = getDescForUser(givenUsername);
             String score = getScoreForUser(givenUsername);
 
-            if (email != null) {
-                userEmailTextView.setText(email);
-            } else {
-                Toast.makeText(this, "No se encontró el correo del usuario", Toast.LENGTH_SHORT).show();
-            }
+            // Mostrar el nombre de usuario en el TextView correspondiente
+            userNameTextView.setVisibility(View.VISIBLE);  // Hacer visible el TextView
+            userNameTextView.setText("Nombre de usuario: " + givenUsername); // Establecer el nombre de usuario
 
+            // Mostrar la descripción del usuario
             if (description != null) {
                 userDescriptionEdit.setText(description);
             }
 
+            // Mostrar el puntaje del usuario
             if (score != null) {
-                userScoreTextView.setText("Score: " + score);
+                userScoreTextView.setText("Puntaje: " + score); // Mostrar el puntaje
+                userScoreTextView.setVisibility(View.VISIBLE);  // Asegurarse de que el puntaje sea visible
             } else {
-                userScoreTextView.setText("Score: N/A");
+                userScoreTextView.setText("Puntaje: 0");
+                userScoreTextView.setVisibility(View.VISIBLE);  // Asegurarse de que el puntaje sea visible
             }
 
+            // Guardar cambios en la descripción
             saveButton.setOnClickListener(v -> {
                 String newDescription = userDescriptionEdit.getText().toString();
                 if (saveDescForUser(givenUsername, newDescription)) {
@@ -68,6 +74,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 }
             });
 
+            // Volver a la actividad principal
             goBack.setOnClickListener(v -> {
                 Intent intent2 = new Intent(this, WelcomeActivity.class);
                 startActivity(intent2);
@@ -80,6 +87,9 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     // Método para obtener el correo del usuario
     private String getEmailForUser(String username) {
         try {
@@ -89,7 +99,7 @@ public class UserProfileActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 String[] credentials = line.split(",");
                 if (credentials.length >= 2 && credentials[0].equals(username)) {
-                    return credentials[0];
+                    return credentials[1]; // Devuelve el correo electrónico
                 }
             }
             reader.close();
@@ -97,8 +107,9 @@ public class UserProfileActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return null; // Si no se encuentra el usuario
     }
+
 
     // Método para obtener la descripción del usuario
     private String getDescForUser(String username) {
@@ -109,7 +120,7 @@ public class UserProfileActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 String[] credentials = line.split(",");
                 if (credentials.length >= 3 && credentials[0].equals(username)) {
-                    return credentials[2];
+                    return credentials[2]; // Devuelve la descripción
                 }
             }
             reader.close();
@@ -120,6 +131,7 @@ public class UserProfileActivity extends AppCompatActivity {
         return null;
     }
 
+
     // Método para obtener el puntaje del usuario
     private String getScoreForUser(String username) {
         try {
@@ -129,7 +141,7 @@ public class UserProfileActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 String[] credentials = line.split(",");
                 if (credentials.length >= 4 && credentials[0].equals(username)) {
-                    return credentials[3];
+                    return credentials[3]; // Devuelve el puntaje
                 }
             }
             reader.close();
@@ -139,6 +151,7 @@ public class UserProfileActivity extends AppCompatActivity {
         }
         return null;
     }
+
 
     // Método para guardar la descripción del usuario
     private boolean saveDescForUser(String username, String newDescription) {
