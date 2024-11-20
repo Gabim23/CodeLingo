@@ -1,6 +1,8 @@
 package com.example.codelingo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,6 +25,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button btnToggleDarkMode = findViewById(R.id.btnToggleDarkMode);
+
+        // Verifica el tema actual y ajusta el texto del botón
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            btnToggleDarkMode.setText("Modo Claro");
+        } else {
+            btnToggleDarkMode.setText("Modo Oscuro");
+        }
+
+        // Configura el listener para cambiar el tema
+        btnToggleDarkMode.setOnClickListener(v -> {
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                // Cambiar a modo claro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                btnToggleDarkMode.setText("Modo Oscuro");
+            } else {
+                // Cambiar a modo oscuro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                btnToggleDarkMode.setText("Modo Claro");
+            }
+        });
+
+
+
 
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);

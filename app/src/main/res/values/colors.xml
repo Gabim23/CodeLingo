@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="gradient_start">#3A1C71</color> <!-- Deep purple -->
     <color name="gradient_end">#D76D77</color>   <!-- Soft pink -->
     <color name="input_background">#FFFFFF33</color> <!-- Semi-transparent white -->
     <color name="input_border">#FFFFFF88</color>    <!-- Light transparent border -->
-    <color name="hint_color">#FFFFFFAA</color>    <!-- Light transparent text color -->
-    <color name="button_normal">#FF6F61</color>   <!-- Coral color for button -->
-    <color name="button_pressed">#D65A50</color>  <!-- Darker shade when pressed -->
-
-    <color name="colorPrimary">#673AB7</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="grey">#737373</color>
+    <color name="hint_color">#737373</color>        <!-- Neutral grey for light theme -->
+    <color name="button_normal">#FF6F61</color>     <!-- Coral color for button -->
+    <color name="button_pressed">#D65A50</color>    <!-- Darker shade when pressed -->
+    <color name="colorPrimary">#673AB7</color>      <!-- Purple -->
+    <color name="colorPrimaryDark">#512DA8</color>  <!-- Slightly darker purple -->
+    <color name="colorAccent">#03DAC5</color>       <!-- Teal -->
+    <color name="colorBackground">#FFFFFF</color>   <!-- White background -->
+    <color name="grey">#737373</color>              <!-- Neutral grey -->
+    <color name="textColor">#000000</color>
+    <color name="textFieldTextColor">#FFFFFF</color> <!-- Texto negro -->
+    <color name="hint">#FFFFFF</color> <!-- Texto negro -->
+    <!-- Black text -->
 </resources>

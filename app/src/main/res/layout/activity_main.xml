@@ -34,6 +34,7 @@
                 android:text="CodeLingo"
                 android:textSize="17sp"
                 android:textStyle="bold"
+                android:textColor="@color/textColor"
                 />
 
             <EditText
@@ -41,11 +42,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Usuario"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/hint_color"
+
                 android:textSize="14sp"
                 android:drawablePadding="15dp"
                 android:drawableStart="@drawable/ic_user"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/edtdesign"
+
                 />
             <EditText
                 android:id="@+id/passwordEditText"
@@ -58,6 +63,7 @@
                 android:drawablePadding="15dp"
                 android:background="@drawable/edtdesign"
                 android:inputType="textPassword"
+                android:textColorHint="@color/hint_color"
                 />
 
             <Button
@@ -68,7 +74,9 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btndesign"
                 android:text="Iniciar sesión"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="@color/textColor"/>
+
 
             <Button
                 android:id="@+id/registerButton"
@@ -78,13 +86,16 @@
                 android:textAllCaps="false"
                 android:layout_gravity="right"
                 android:background="@drawable/btndesign"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:textColor="@color/textColor"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="¿No tienes cuenta? Regístrate"
                 android:layout_marginTop="20dp"
+                android:textColor="@color/textColor"
                 />
 
         </LinearLayout>
@@ -99,4 +110,9 @@
             android:layout_marginTop="20dp"
             android:padding="16dp"/>
 
+        <Button
+            android:id="@+id/btnToggleDarkMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modo Oscuro" />
     </RelativeLayout></LinearLayout>
