@@ -48,8 +48,8 @@
 
                 android:drawablePadding="15dp"
                 android:hint="Usuario"
-                android:textColor="@color/textColor"
-                android:textColorHint="@color/hint"
+                android:textColor="@color/hint_main"
+                android:textColorHint="@color/hint_main"
                 android:textSize="14sp"
 
                 />
@@ -65,6 +65,7 @@
                 android:hint="Contraseña"
                 android:inputType="textPassword"
                 android:textColorHint="@color/hint"
+                android:textColor="@color/hint_main"
                 android:textSize="14sp" />
 
             <Button
@@ -76,7 +77,7 @@
                 android:background="@drawable/btndesign"
                 android:text="Iniciar sesión"
                 android:textAllCaps="false"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/white" />
 
 
             <Button
@@ -88,7 +89,7 @@
                 android:background="@drawable/btndesign"
                 android:text="Registrarse"
                 android:textAllCaps="false"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,31 +102,23 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/deleteAllUsersButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#D32F2F"
-            android:padding="16dp"
-            android:text="Eliminar todos los usuarios"
-            android:textColor="#FFFFFF" />
-
-        <Button
             android:id="@+id/btnToggleDarkMode"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="130dp"
-            android:layout_marginLeft="108dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="22dp"
             android:background="@drawable/dark_mode_button"
-            android:shadowColor="@color/black"
-
             android:drawableTop="@drawable/moon_1"
             android:gravity="center"
+            android:shadowColor="@color/black"
             android:text="Modo Oscuro"
             android:textColor="@color/hint_color"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+
 
     </RelativeLayout>
 </LinearLayout>

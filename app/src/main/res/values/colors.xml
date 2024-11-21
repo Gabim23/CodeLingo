@@ -21,6 +21,9 @@
     <color name="grey">#737373</color>              <!-- Neutral grey -->
     <color name="textColor">#000000</color>
     <color name="textFieldTextColor">#FFFFFF</color> <!-- Texto negro -->
-    <color name="hint">#000000</color> <!-- Texto negro -->
+    <color name="hint">#000000</color>
+    <color name="hint_main">#000000</color>
+    <color name="fondo_seleccion_nivel">#3A0692</color>
     <!-- Black text -->
+
 </resources>

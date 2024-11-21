@@ -22,5 +22,7 @@
     <color name="textColor">#FFFFFF</color>         <!-- White text -->
     <color name="textFieldTextColor">#000000</color> <!-- Texto negro -->
     <color name="hint">#000000</color> <!-- Texto negro -->
+    <color name="fondo_seleccion_nivel">#1E0345</color>
+    <color name="hint_main">#000000</color>
 
 </resources>

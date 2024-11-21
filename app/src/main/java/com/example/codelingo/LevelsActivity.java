@@ -19,44 +19,53 @@ public class LevelsActivity extends AppCompatActivity implements OnLevelClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
+
         rvLevels = findViewById(R.id.rvLevels);
         rvLevels.setLayoutManager(new LinearLayoutManager(this));
+
         tvMessage = findViewById(R.id.tvMessage);
+
+        // Initialize SharedPreferences for level state management
         SharedPreferences sharedPreferences = getSharedPreferences("LevelPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Unlock Level 0 by default if first time
         if (!sharedPreferences.contains("level_0")) {
             editor.putBoolean("level_0", true);
             editor.putBoolean("level_1", false);
             editor.putBoolean("level_2", false);
             editor.apply();
         }
-        boolean isLevel1Unlocked = sharedPreferences.getBoolean("level_1", false);
-        boolean isLevel2Unlocked = sharedPreferences.getBoolean("level_2", false);
-        String[] levels = new String[11];
-        levels[0] = "Nivel 0";
-        levels[1] = isLevel1Unlocked ? "Nivel 1" : "Nivel 1 (Bloqueado)";
-        levels[2] = isLevel2Unlocked ? "Nivel 2" : "Nivel 2 (Bloqueado)";
-        for (int i = 3; i < levels.length; i++) {
-            levels[i] = "Nivel " + i + " (Bloqueado)";
+
+        // Prepare levels array dynamically
+        int totalLevels = 10; // Adjust as needed
+        String[] levels = new String[totalLevels];
+        for (int i = 0; i < totalLevels; i++) {
+            boolean isUnlocked = sharedPreferences.getBoolean("level_" + i, false);
+            levels[i] = isUnlocked ? "Nivel " + i : "Nivel " + i + " (🔒)";
         }
+
+        // Initialize RecyclerView Adapter
         LevelsAdapter adapter = new LevelsAdapter(this, levels, this);
         rvLevels.setAdapter(adapter);
+
+        // Set welcome message
         tvMessage.setVisibility(View.VISIBLE);
         tvMessage.setText("Selecciona un nivel");
     }
 
     @Override
     public void onLevelClick(int position) {
-        int currentLevel = position;
         SharedPreferences sharedPreferences = getSharedPreferences("LevelPrefs", MODE_PRIVATE);
-        boolean isLevelUnlocked = sharedPreferences.getBoolean("level_" + currentLevel, false);
-        if (currentLevel == 0 || isLevelUnlocked) {
+        boolean isLevelUnlocked = sharedPreferences.getBoolean("level_" + position, false);
+
+        if (position == 0 || isLevelUnlocked) {
             Intent intent = new Intent(LevelsActivity.this, QuestionsActivity.class);
-            intent.putExtra("CURRENT_LEVEL", currentLevel);
+            intent.putExtra("CURRENT_LEVEL", position);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Este nivel está bloqueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "⚠️ Este nivel está bloqueado", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
+

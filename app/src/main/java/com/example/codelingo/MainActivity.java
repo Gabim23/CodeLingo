@@ -3,6 +3,7 @@ package com.example.codelingo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText;
     private Button loginButton, registerButton, deleteAllUsersButton;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
-        deleteAllUsersButton = findViewById(R.id.deleteAllUsersButton);
+
 
         // Botón de iniciar sesión
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -93,13 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Botón de eliminar todos los usuarios
-        deleteAllUsersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteAllUsers(); // Llamamos al método para eliminar todos los usuarios
-            }
-        });
+
     }
 
     // Método para eliminar todos los usuarios del archivo users.txt
