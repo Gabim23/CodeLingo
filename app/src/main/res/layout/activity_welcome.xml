@@ -2,56 +2,121 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/profile"
     android:orientation="vertical"
-    android:gravity="center"> <!-- Centra el contenido -->
+    android:background="@drawable/back"
+    android:padding="16dp"
+    android:gravity="center">
 
-    <!-- Botón para ver el ranking -->
-    <Button
-        android:id="@+id/viewRankingButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ver Ranking"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal" /> <!-- Centrado horizontalmente -->
-
-    <!-- Botón del perfil de usuario -->
-    <Button
-        android:id="@+id/profileButton"
-        style="@android:style/Widget.Holo.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Perfil"
-        android:drawableStart="@drawable/ic_user"/>
-
-
-    <!-- Contenedor para el contenido principal -->
+    <!-- Encabezado con título e ícono -->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:gravity="center"
+        android:paddingBottom="24dp">
 
-        <!-- Texto de bienvenida -->
+        <!-- Ícono de encabezado -->
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/logo_sinfondo"
+            android:contentDescription="Logo de CodeLingo"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Título de la aplicación -->
         <TextView
-            android:id="@+id/welcomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bienvenido"
-            android:textSize="24sp"
-            android:textColor="#FFFFFF" /> <!-- Color de texto agregado -->
+            android:text="CodeLingo"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
-        <!-- Botón para jugar -->
+    <!-- Sección de botones estilo cuadrícula -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:padding="8dp">
+
+        <!-- Botón 1: Ver Ranking -->
+        <Button
+            android:id="@+id/viewRankingButton"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="Ver el ranking"
+            android:drawableTop="@drawable/trophy3"
+            android:drawablePadding="12dp"
+            android:padding="12dp"
+            android:text="Ranking"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <!-- Botón 2: Perfil -->
+        <Button
+            android:id="@+id/profileButton"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="Ver el ranking"
+            android:drawableTop="@drawable/ic_profile"
+            android:drawablePadding="12dp"
+            android:padding="12dp"
+            android:text="Perfil"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <!-- Botón 3: Jugar -->
         <Button
             android:id="@+id/btnPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="Ver el ranking"
+            android:drawableTop="@drawable/ic_gamepad"
+            android:drawablePadding="12dp"
             android:padding="12dp"
             android:text="Jugar"
-            android:textSize="18sp"
-            android:layout_gravity="center" /> <!-- Centrado del botón -->
-    </LinearLayout>
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <!-- Botón 4: Ajustes -->
+        <Button
+            android:id="@+id/settings"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_background"
+            android:drawableTop="@drawable/ic_settings"
+            android:drawablePadding="12dp"
+            android:padding="12dp"
+            android:text="Ajustes"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+        <!-- Botón 5: Prueba de Nivel -->
+        <Button
+            android:id="@+id/SelectionLevel"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="Seleccion de nivel"
+            android:drawableTop="@drawable/ic_pruebanivel"
+            android:drawablePadding="12dp"
+            android:padding="12dp"
+            android:text="Prueba nivel"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </GridLayout>
 </LinearLayout>

@@ -45,8 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         saveNewUser(newUsername, newPassword);
                         Toast.makeText(RegisterActivity.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
-                        // Redirigir a la prueba de nivel después de registrar
-                        Intent intent = new Intent(RegisterActivity.this, TestLevelActivity.class);
+                        // Redirigir a la pagina de iniciar sesion
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }

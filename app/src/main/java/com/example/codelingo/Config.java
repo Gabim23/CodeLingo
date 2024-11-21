@@ -11,20 +11,22 @@ public class Config extends AppCompatActivity {
 
     private Button logoutButton;
     private Button changePasswordButton;
-    Button goBack = findViewById(R.id.goBack2);
+    private Button goBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.config); // Asegúrate de que este layout está bien
+
+        // Inicializa todos los botones dentro de onCreate después de setContentView
+        logoutButton = findViewById(R.id.logoutButton2);
+        changePasswordButton = findViewById(R.id.changePasswordButton2);
+        goBack = findViewById(R.id.goBack2);
 
         SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String givenUsername = sharedPref.getString("username", null);
 
         if (givenUsername != null) {
-            logoutButton = findViewById(R.id.logoutButton2);
-            changePasswordButton = findViewById(R.id.changePasswordButton);
-
             // Botón para cerrar sesión
             logoutButton.setOnClickListener(v -> {
                 Intent intent = new Intent(this, MainActivity.class);
@@ -39,6 +41,7 @@ public class Config extends AppCompatActivity {
                 startActivity(changePasswordIntent);
             });
 
+            // Botón para regresar
             goBack.setOnClickListener(v -> {
                 Intent intent = new Intent(this, WelcomeActivity.class);
                 startActivity(intent);
@@ -52,6 +55,7 @@ public class Config extends AppCompatActivity {
         }
     }
 }
+
 
 
 
