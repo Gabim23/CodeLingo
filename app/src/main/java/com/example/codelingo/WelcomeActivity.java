@@ -13,7 +13,8 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button btnPlay;
     private Button profileButton;
     private Button viewRankingButton;  // Declaramos el botón de ranking
-
+    private Button settings;
+    private Button SelectionLevel;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,26 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, RankingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //settings
+        settings = findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeActivity.this, Config.class);
+                startActivity(intent);
+            }
+        });
+
+        //settings
+        SelectionLevel = findViewById(R.id.SelectionLevel);
+        SelectionLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeActivity.this, TestLevelActivity.class);
                 startActivity(intent);
             }
         });
