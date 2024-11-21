@@ -11,7 +11,7 @@
     <color name="gradient_end">#A04663</color>      <!-- Slightly darker pink -->
     <color name="input_background">#33333333</color> <!-- Dark transparent grey -->
     <color name="input_border">#55555588</color>    <!-- Slightly darker border -->
-    <color name="hint_color">#AAAAAA</color>        <!-- Light grey hint for dark theme -->
+    <color name="hint_color">#FFFFFF</color>        <!-- Light grey hint for dark theme -->
     <color name="button_normal">#FF6F61</color>     <!-- Coral color remains consistent -->
     <color name="button_pressed">#D65A50</color>
     <color name="colorPrimary">#673AB7</color>      <!-- Purple remains same -->

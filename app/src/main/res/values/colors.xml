@@ -11,7 +11,7 @@
     <color name="gradient_end">#D76D77</color>   <!-- Soft pink -->
     <color name="input_background">#FFFFFF33</color> <!-- Semi-transparent white -->
     <color name="input_border">#FFFFFF88</color>    <!-- Light transparent border -->
-    <color name="hint_color">#737373</color>        <!-- Neutral grey for light theme -->
+    <color name="hint_color">#FFFFFF</color>        <!-- Neutral grey for light theme -->
     <color name="button_normal">#FF6F61</color>     <!-- Coral color for button -->
     <color name="button_pressed">#D65A50</color>    <!-- Darker shade when pressed -->
     <color name="colorPrimary">#673AB7</color>      <!-- Purple -->
@@ -21,6 +21,6 @@
     <color name="grey">#737373</color>              <!-- Neutral grey -->
     <color name="textColor">#000000</color>
     <color name="textFieldTextColor">#FFFFFF</color> <!-- Texto negro -->
-    <color name="hint">#FFFFFF</color> <!-- Texto negro -->
+    <color name="hint">#000000</color> <!-- Texto negro -->
     <!-- Black text -->
 </resources>
