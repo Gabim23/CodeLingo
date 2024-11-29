@@ -18,9 +18,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
-
 public class MainActivity extends AppCompatActivity {
 
+    private Button btnToggleDarkMode;
     private EditText usernameEditText, passwordEditText;
     private Button loginButton, registerButton;
 
@@ -30,80 +30,88 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnToggleDarkMode = findViewById(R.id.btnToggleDarkMode);
+        btnToggleDarkMode = findViewById(R.id.btnToggleDarkMode);
+        usernameEditText = findViewById(R.id.usernameEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        loginButton = findViewById(R.id.loginButton);
+        registerButton = findViewById(R.id.registerButton);
 
-        // Check current theme and set button appearance
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+        // Recuperar el estado preferido del modo oscuro desde SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE);
+        boolean isDarkModeEnabled = sharedPreferences.getBoolean("dark_mode", false);
+
+        // Configurar el modo oscuro según la preferencia guardada
+        AppCompatDelegate.setDefaultNightMode(isDarkModeEnabled ?
+                AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
+        // Configurar el estado inicial del botón
+        updateButtonAppearance(isDarkModeEnabled);
+
+        // Configurar el listener del botón
+        btnToggleDarkMode.setOnClickListener(v -> {
+            // Animar el botón
+            btnToggleDarkMode.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_animation));
+
+            // Cambiar el modo oscuro después de la animación
+            btnToggleDarkMode.postDelayed(() -> {
+                boolean newDarkModeState = !isDarkModeEnabled;
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                // Guardar el nuevo estado
+                editor.putBoolean("dark_mode", newDarkModeState);
+                editor.apply();
+
+                // Cambiar el modo
+                AppCompatDelegate.setDefaultNightMode(newDarkModeState ?
+                        AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
+                // Actualizar la apariencia del botón
+                updateButtonAppearance(newDarkModeState);
+            }, 400); // Tiempo que dura la animación
+        });
+
+        // Botón de iniciar sesión
+        loginButton.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+
+            // Verificar credenciales y obtener la puntuación
+            int score = checkUserCredentials(username, password);
+            if (score != -1) {  // -1 indica que las credenciales son incorrectas
+                // Guardar el nombre de usuario en SharedPreferences
+                SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("username", username);
+                editor.putInt("score", score); // Guardar la puntuación
+                editor.apply();
+
+                // Iniciar la actividad de bienvenida
+                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(MainActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Botón de registrarse
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    /**
+     * Actualiza la apariencia del botón según el estado del modo oscuro.
+     */
+    private void updateButtonAppearance(boolean isDarkModeEnabled) {
+        if (isDarkModeEnabled) {
             btnToggleDarkMode.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.sun, 0, 0);
             btnToggleDarkMode.setText("Modo Claro");
         } else {
             btnToggleDarkMode.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.moon_stars_, 0, 0);
             btnToggleDarkMode.setText("Modo Oscuro");
         }
-
-        // Set click listener for toggling dark mode
-        btnToggleDarkMode.setOnClickListener(v -> {
-            // Apply animation to the button
-            btnToggleDarkMode.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_animation));
-
-            // Change theme after animation completes
-            btnToggleDarkMode.postDelayed(() -> {
-                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    btnToggleDarkMode.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.moon_stars_, 0
-                            , 0);
-                    btnToggleDarkMode.setText("Modo Oscuro");
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    btnToggleDarkMode.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.sun, 0, 0);
-                    btnToggleDarkMode.setText("Modo Claro");
-                }
-            }, 400); // Delay matches the animation duration
-        });
-
-
-
-
-    usernameEditText = findViewById(R.id.usernameEditText);
-        passwordEditText = findViewById(R.id.passwordEditText);
-        loginButton = findViewById(R.id.loginButton);
-        registerButton = findViewById(R.id.registerButton);
-
-        // Botón de iniciar sesión
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-
-                // Verificar credenciales y obtener la puntuación
-                int score = checkUserCredentials(username, password);
-                if (score != -1) {  // -1 indica que las credenciales son incorrectas
-                    // Guardar el nombre de usuario en SharedPreferences
-                    SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("username", username);
-                    editor.putInt("score", score); // Guardar la puntuación
-                    editor.apply();
-
-                    // Iniciar la actividad de bienvenida
-                    Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(MainActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        // Botón de registrarse
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     // Método para eliminar todos los usuarios del archivo users.txt
