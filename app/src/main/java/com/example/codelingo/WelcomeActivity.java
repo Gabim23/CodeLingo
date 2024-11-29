@@ -1,12 +1,17 @@
 package com.example.codelingo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.res.ResourcesCompat;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -29,7 +34,9 @@ public class WelcomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(WelcomeActivity.this, LevelsActivity.class);
                 startActivity(intent);
             }
+
         });
+
 
         // Encuentra el botón de perfil
         profileButton = findViewById(R.id.profileButton);
@@ -70,6 +77,27 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, Config.class);
                 startActivity(intent);
+            }
+        });
+        Button btnToggleDarkMode = findViewById(R.id.btnToggleDarkMode);
+
+        // Verifica el tema actual y ajusta el texto del botón
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            btnToggleDarkMode.setText("Modo Claro");
+        } else {
+            btnToggleDarkMode.setText("Modo Oscuro");
+        }
+
+        // Configura el listener para cambiar el tema
+        btnToggleDarkMode.setOnClickListener(v -> {
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                // Cambiar a modo claro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                btnToggleDarkMode.setText("Modo Oscuro");
+            } else {
+                // Cambiar a modo oscuro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                btnToggleDarkMode.setText("Modo Claro");
             }
         });
 

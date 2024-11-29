@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.CodeLingo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#311681</item>
+        <item name="colorPrimary">#1D0459</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <!-- Black background -->
         <item name="android:textColor">@color/textFieldTextColor</item>             <!-- White text -->
         <item name="buttonStyle">@style/ButtonStyle</item>
-</style>
+        <item name="android:fontFamily">@font/fontnormal</item>
+
+    </style>
 
     <!-- Button Style -->
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">

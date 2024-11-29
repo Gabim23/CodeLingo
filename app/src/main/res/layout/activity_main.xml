@@ -24,25 +24,28 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center"
+                android:background="@drawable/rounded_edittext"
                 android:src="@drawable/logo_sinfondo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:paddingTop="23px"
                 android:text="CodeLingo"
                 android:textColor="@color/textColor"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textSize="40sp"
+                android:fontFamily="@font/myfont"
+ />
 
             <EditText
                 android:id="@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/edtdesign"
                 android:drawableStart="@drawable/ic_user"
 
@@ -64,8 +67,8 @@
                 android:drawablePadding="15dp"
                 android:hint="Contraseña"
                 android:inputType="textPassword"
-                android:textColorHint="@color/hint"
                 android:textColor="@color/hint_main"
+                android:textColorHint="@color/hint"
                 android:textSize="14sp" />
 
             <Button
@@ -103,20 +106,22 @@
 
         <Button
             android:id="@+id/btnToggleDarkMode"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="77dp"
+            android:layout_height="56dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="22dp"
-            android:layout_marginEnd="22dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="28dp"
             android:background="@drawable/dark_mode_button"
             android:drawableTop="@drawable/moon_1"
-            android:gravity="center"
+            android:drawablePadding="8dp"
+            android:gravity="center_horizontal"
+            android:scaleType="center"
             android:shadowColor="@color/black"
-            android:text="Modo Oscuro"
             android:textColor="@color/hint_color"
-            android:textSize="12sp"
             android:textStyle="bold" />
+
+
 
 
 
