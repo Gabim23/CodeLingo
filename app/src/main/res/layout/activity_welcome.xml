@@ -1,122 +1,183 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/back"
-    android:padding="16dp"
-    android:gravity="center">
+    android:background="@drawable/back">
 
-    <!-- Encabezado con título e ícono -->
+    <!-- Button to toggle dark mode -->
+    <Button
+        android:id="@+id/btnToggleDarkMode"
+        android:layout_width="77dp"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/dark_mode_button"
+        android:drawableTop="@drawable/moon_1"
+        android:drawablePadding="8dp"
+        android:gravity="center_horizontal"
+        android:scaleType="center"
+        android:shadowColor="@color/black"
+        android:textColor="@color/hint_color"
+        android:textStyle="bold" />
+
+    <!-- LinearLayout for the rest of the UI -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
-        android:paddingBottom="24dp">
+        android:padding="16dp"
+        android:gravity="center">
 
-        <!-- Ícono de encabezado -->
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/logo_sinfondo"
-            android:contentDescription="Logo de CodeLingo"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Título de la aplicación -->
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CodeLingo"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="0dp">
+
+            <!-- Logo Image -->
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                android:background="@drawable/rounded_edittext"
+                android:src="@drawable/logo_sinfondo"
+                android:contentDescription="Logo de CodeLingo"
+                android:layout_marginBottom="12dp"
+                android:elevation="4dp" />
+
+            <!-- App Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CodeLingo"
+                android:textSize="40sp"
+                android:textColor="@color/textColor"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:fontFamily="@font/myfont"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
+        </LinearLayout>
+
+        <!-- GridLayout for the buttons -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="3"
+            android:padding="8dp">
+
+            <!-- Button 1: Ver Ranking -->
+            <Button
+                android:id="@+id/viewRankingButton"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Ver el ranking"
+                android:drawableTop="@drawable/trophy_svgrepo_com"
+                android:drawablePadding="12dp"
+                android:padding="12dp"
+                android:text="Ranking"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:elevation="6dp"
+                />
+
+            <!-- Button 2: Perfil -->
+            <Button
+                android:id="@+id/profileButton"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Ver el ranking"
+                android:drawableTop="@drawable/user_4_svgrepo_com"
+                android:drawablePadding="12dp"
+                android:padding="12dp"
+                android:text="Perfil"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:elevation="6dp" />
+
+            <!-- Button 3: Jugar -->
+            <Button
+                android:id="@+id/btnPlay"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Ver el ranking"
+                android:drawableTop="@drawable/game_svgrepo_com"
+                android:drawablePadding="12dp"
+                android:padding="12dp"
+                android:text="Jugar"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:elevation="6dp" />
+
+            <!-- Button 4: Ajustes -->
+            <Button
+                android:id="@+id/settings"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Ver el ranking"
+                android:drawableTop="@drawable/settings_svgrepo_com"
+                android:drawablePadding="12dp"
+                android:padding="12dp"
+                android:text="Ajustes"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:elevation="6dp" />
+
+            <!-- Button 5: Prueba de Nivel -->
+            <Button
+                android:id="@+id/SelectionLevel"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Seleccion de nivel"
+                android:drawableTop="@drawable/question_and_answer_svgrepo_com"
+                android:drawablePadding="12dp"
+                android:padding="12dp"
+                android:text="Prueba nivel"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:elevation="6dp" />
+
+            <!-- Button 6: Tienda -->
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Seleccion de nivel"
+                android:drawableTop="@drawable/signboard_svgrepo_com"
+                android:drawablePadding="12dp"
+                android:padding="12dp"
+                android:text="Tienda"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:elevation="6dp" />
+
+        </GridLayout>
+
     </LinearLayout>
 
-    <!-- Sección de botones estilo cuadrícula -->
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:rowCount="3"
-        android:padding="8dp">
-
-        <!-- Botón 1: Ver Ranking -->
-        <Button
-            android:id="@+id/viewRankingButton"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:layout_columnWeight="1"
-            android:layout_margin="8dp"
-            android:background="@drawable/button_background"
-            android:contentDescription="Ver el ranking"
-            android:drawableTop="@drawable/trophy3"
-            android:drawablePadding="12dp"
-            android:padding="12dp"
-            android:text="Ranking"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-
-        <!-- Botón 2: Perfil -->
-        <Button
-            android:id="@+id/profileButton"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:layout_columnWeight="1"
-            android:layout_margin="8dp"
-            android:background="@drawable/button_background"
-            android:contentDescription="Ver el ranking"
-            android:drawableTop="@drawable/ic_profile"
-            android:drawablePadding="12dp"
-            android:padding="12dp"
-            android:text="Perfil"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-
-        <!-- Botón 3: Jugar -->
-        <Button
-            android:id="@+id/btnPlay"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:layout_columnWeight="1"
-            android:layout_margin="8dp"
-            android:background="@drawable/button_background"
-            android:contentDescription="Ver el ranking"
-            android:drawableTop="@drawable/ic_gamepad"
-            android:drawablePadding="12dp"
-            android:padding="12dp"
-            android:text="Jugar"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-
-        <!-- Botón 4: Ajustes -->
-        <Button
-            android:id="@+id/settings"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:layout_columnWeight="1"
-            android:layout_margin="8dp"
-            android:background="@drawable/button_background"
-            android:drawableTop="@drawable/ic_settings"
-            android:drawablePadding="12dp"
-            android:padding="12dp"
-            android:text="Ajustes"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-        <!-- Botón 5: Prueba de Nivel -->
-        <Button
-            android:id="@+id/SelectionLevel"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
-            android:layout_columnWeight="1"
-            android:layout_margin="8dp"
-            android:background="@drawable/button_background"
-            android:contentDescription="Seleccion de nivel"
-            android:drawableTop="@drawable/ic_pruebanivel"
-            android:drawablePadding="12dp"
-            android:padding="12dp"
-            android:text="Prueba nivel"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-    </GridLayout>
-</LinearLayout>
+</RelativeLayout>

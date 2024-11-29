@@ -19,7 +19,7 @@
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="3"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/myfont"
         android:paddingBottom="16dp" />
 
     <ListView
