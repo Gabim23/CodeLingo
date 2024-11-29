@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,10 +18,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
-    private Button loginButton, registerButton, deleteAllUsersButton;
+    private Button loginButton, registerButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -30,34 +32,42 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnToggleDarkMode = findViewById(R.id.btnToggleDarkMode);
 
-        // Verifica el tema actual y ajusta el texto del botón
+        // Check current theme and set button appearance
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            btnToggleDarkMode.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.sun, 0, 0);
             btnToggleDarkMode.setText("Modo Claro");
         } else {
+            btnToggleDarkMode.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.moon_stars_, 0, 0);
             btnToggleDarkMode.setText("Modo Oscuro");
         }
 
-        // Configura el listener para cambiar el tema
+        // Set click listener for toggling dark mode
         btnToggleDarkMode.setOnClickListener(v -> {
-            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-                // Cambiar a modo claro
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                btnToggleDarkMode.setText("Modo Oscuro");
-            } else {
-                // Cambiar a modo oscuro
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                btnToggleDarkMode.setText("Modo Claro");
-            }
+            // Apply animation to the button
+            btnToggleDarkMode.startAnimation(AnimationUtils.loadAnimation(this, R.anim.button_animation));
+
+            // Change theme after animation completes
+            btnToggleDarkMode.postDelayed(() -> {
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    btnToggleDarkMode.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.moon_stars_, 0
+                            , 0);
+                    btnToggleDarkMode.setText("Modo Oscuro");
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    btnToggleDarkMode.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.sun, 0, 0);
+                    btnToggleDarkMode.setText("Modo Claro");
+                }
+            }, 400); // Delay matches the animation duration
         });
 
 
 
 
-        usernameEditText = findViewById(R.id.usernameEditText);
+    usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
-
 
         // Botón de iniciar sesión
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     // Método para eliminar todos los usuarios del archivo users.txt

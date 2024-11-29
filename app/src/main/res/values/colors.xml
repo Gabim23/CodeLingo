@@ -24,6 +24,8 @@
     <color name="hint">#000000</color>
     <color name="hint_main">#000000</color>
     <color name="fondo_seleccion_nivel">#3A0692</color>
+    <color name="luna">#FFFFFF</color>
+    <color name="estrella">#FFEB3B</color>
     <!-- Black text -->
 
 </resources>
