@@ -109,7 +109,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
                 // Actualizar la apariencia del botón
                 updateButtonAppearance(newDarkModeState);
-            }, 400); // Tiempo que dura la animación
+            }, 700); // Tiempo que dura la animación
         });
 
         // Actualiza la apariencia del botón según el estado del modo oscuro

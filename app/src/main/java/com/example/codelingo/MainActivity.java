@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Actualizar la apariencia del botón
                 updateButtonAppearance(newDarkModeState);
-            }, 400); // Tiempo que dura la animación
+            }, 700); // Tiempo que dura la animación
         });
 
         // Botón de iniciar sesión
