@@ -91,13 +91,14 @@ public class RegisterActivity extends AppCompatActivity {
     private void saveNewUser(String username, String password) {
         try {
             FileOutputStream fos = openFileOutput("users.txt", MODE_APPEND);
-            String userData = username + "," + password + ",0,0\n"; // Añadido el puntaje al final (inicializado en 0)
+            String userData = username + "," + password + ",5,0,0\n"; // Añadido el atributo vidas con valor 5
             fos.write(userData.getBytes());
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     // Método para validar que la contraseña contenga al menos una mayúscula y un carácter especial
     private boolean isValidPassword(String password) {

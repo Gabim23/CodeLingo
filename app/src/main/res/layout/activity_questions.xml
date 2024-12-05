@@ -1,11 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back"
     android:padding="16dp">
 
-    <!-- Contenedor general para centrar todos los elementos -->
+    <!-- Contenedor para las vidas, alineado a la parte superior derecha -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center">
+
+        <!-- Contenedor para "Vidas:" y los corazones (se alinean verticalmente) -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <!-- Texto "Vidas:" con tamaño más grande -->
+            <TextView
+                android:id="@+id/tvLivesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vidas:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/textColor"
+                android:layout_marginBottom="8dp" />  <!-- Espacio entre el texto y los corazones -->
+
+            <!-- Contenedor dinámico para los corazones -->
+            <LinearLayout
+                android:id="@+id/llLivesContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- Contenedor principal para otros elementos de la pantalla (pregunta, botones, etc.) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +51,7 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal">
 
-        <!-- Título de la pregunta -->
+        <!-- Otros elementos como la pregunta, botones, etc. -->
         <TextView
             android:id="@+id/tvQuestion"
             android:layout_width="wrap_content"
@@ -25,6 +63,8 @@
             android:layout_marginBottom="20dp"
             android:gravity="center" />
 
+    <!-- Aquí los botones y demás elementos -->
+        <!-- ... -->
         <!-- Botones de opciones -->
         <Button
             android:id="@+id/btnOption1"
@@ -98,5 +138,7 @@
             android:textColor="@color/textColor"
             android:layout_marginTop="20dp"
             android:gravity="center" />
+
     </LinearLayout>
 </RelativeLayout>
+
