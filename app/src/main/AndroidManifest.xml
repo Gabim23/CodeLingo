@@ -33,7 +33,9 @@
         <activity android:name=".LevelsActivity" />
         <activity android:name=".QuestionsActivity" />
         <activity android:name=".TestLevelActivity" />
+        <activity android:name=".Shop" />
         <activity android:name=".Config" />
+
     </application>
 
 </manifest>

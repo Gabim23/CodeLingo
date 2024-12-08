@@ -24,12 +24,19 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button settings;
     private Button SelectionLevel;
     private Button btnToggleDarkMode;
+    private Button shop;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        shop = findViewById(R.id.shop);
+        shop.setOnClickListener(view -> {
+            Intent intent = new Intent(WelcomeActivity.this , Shop.class);
+            startActivity(intent);
+        });
 
         // Encuentra el botón de "Jugar"
         btnPlay = findViewById(R.id.btnPlay);
@@ -77,6 +84,7 @@ public class WelcomeActivity extends AppCompatActivity {
             Intent intent = new Intent(WelcomeActivity.this, TestLevelActivity.class);
             startActivity(intent);
         });
+
 
         // Botón de cambiar el modo oscuro
         btnToggleDarkMode = findViewById(R.id.btnToggleDarkMode);
