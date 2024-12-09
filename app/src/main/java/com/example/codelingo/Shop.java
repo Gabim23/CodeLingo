@@ -24,7 +24,7 @@ public class Shop extends AppCompatActivity {
 
         // Cargar las vidas del usuario
         loadUserLives();
-        }
+    }
 
 
     // Método para cargar las vidas del usuario desde el archivo users.txt
@@ -57,9 +57,11 @@ public class Shop extends AppCompatActivity {
         // Actualizar el TextView con las vidas actuales
         updateLivesDisplay(lives);
     }
+
     // Método para actualizar el TextView con las vidas
     private void updateLivesDisplay(int lives) {
-        tvLives.setText(lives);
+        tvLives.setText(String.valueOf(lives)); // Convierte el número a String antes de asignarlo
     }
-    }
+}
+
 
