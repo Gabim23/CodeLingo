@@ -168,6 +168,7 @@
 
             <!-- Button 6: Tienda -->
             <Button
+                android:id="@+id/shop"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
