@@ -83,7 +83,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     // Verificar la contraseña antigua
                     if (credentials[1].equals(oldPassword)) {
                         // Si la contraseña antigua es correcta, actualizar a la nueva contraseña
-                        line = username + "," + newPassword + "," + credentials[2] + "," + credentials[3];  // Mantén los otros datos (p.ej., descripción y puntaje)
+                        line = username + "," + newPassword + "," + credentials[2] + "," + credentials[3] + "," + credentials[4] + "," + credentials[5];  // Mantén los otros datos (p.ej., descripción y puntaje)
                         oldPasswordCorrect = true;
                     }
                     userFound = true;
