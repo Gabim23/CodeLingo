@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,11 +28,24 @@ public class QuestionsActivity extends AppCompatActivity {
     private QuestionManager questionManager;
     private Question currentQuestion;
     private int correctAnswers = 0;
+    private int coins;
+    private int lives;  // Inicializar con 5 vidas
+    private LinearLayout llLivesContainer;
+    private boolean isGameOver = false; // Bandera para evitar mostrar el puntaje total después de Game Over
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
+        llLivesContainer = findViewById(R.id.llLivesContainer);
+
+
+        // Cargar las vidas del usuario
+        loadUserLives();
+        loadUserCoins();
         btnContinue = findViewById(R.id.btnContinue);
         tvFeedback = findViewById(R.id.tvFeedback);
         tvScore = findViewById(R.id.tvScore);
@@ -50,6 +64,7 @@ public class QuestionsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 saveLevelProgress(currentLevel);
                 updateUserScore();
+                saveUserCoins();
                 Intent intent = new Intent(QuestionsActivity.this, LevelsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -59,6 +74,73 @@ public class QuestionsActivity extends AppCompatActivity {
 
         btnContinue.setVisibility(View.GONE);
     }
+
+    private void updateLivesDisplay(int lives) {
+        llLivesContainer.removeAllViews(); // Limpiar los corazones actuales
+
+        for (int i = 0; i < lives; i++) {
+            TextView heart = new TextView(this);
+            heart.setText("❤️");
+            heart.setTextSize(24); // Tamaño del corazón
+            heart.setPadding(8, 0, 8, 0); // Espaciado entre los corazones
+            llLivesContainer.addView(heart); // Añadir al contenedor
+        }
+    }
+
+
+    private void loadUserLives() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+
+        if (username != null) {
+            try {
+                FileInputStream fis = openFileInput("users.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] credentials = line.split(",");
+                    if (credentials[0].equals(username)) {
+                        lives = Integer.parseInt(credentials[2]);  // Cargar las vidas
+                        break;
+                    }
+                }
+                reader.close();
+                fis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        updateLivesDisplay(lives); // Actualizar la UI
+    }
+
+    private void loadUserCoins() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+
+        if (username != null) {
+            try {
+                FileInputStream fis = openFileInput("users.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] credentials = line.split(",");
+                    if (credentials[0].equals(username)) {
+                        coins = Integer.parseInt(credentials[5]);  // Cargar las vidas
+                        break;
+                    }
+                }
+                reader.close();
+                fis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        updateLivesDisplay(lives); // Actualizar la UI
+    }
+
+
 
     private void loadCurrentQuestion() {
         if (questionManager.hasNextQuestion()) {
@@ -95,22 +177,152 @@ public class QuestionsActivity extends AppCompatActivity {
         }
     }
 
+    private void saveUserLives() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+
+        if (username != null) {
+            try {
+                FileInputStream fis = openFileInput("users.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+                List<String> lines = new ArrayList<>();
+                String line;
+                boolean found = false;
+
+                while ((line = reader.readLine()) != null) {
+                    String[] credentials = line.split(",");
+                    if (credentials[0].equals(username)) {
+                        credentials[2] = String.valueOf(lives);  // Actualizar las vidas a 0 si es necesario
+                        line = String.join(",", credentials);
+                        found = true;
+                    }
+                    lines.add(line);
+                }
+
+                reader.close();
+                fis.close();
+
+                if (found) {
+                    FileOutputStream fos = openFileOutput("users.txt", MODE_PRIVATE);
+                    for (String l : lines) {
+                        fos.write((l + "\n").getBytes());
+                    }
+                    fos.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void saveUserCoins() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+
+        if (username != null) {
+            try {
+                FileInputStream fis = openFileInput("users.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+                List<String> lines = new ArrayList<>();
+                String line;
+                boolean found = false;
+
+                while ((line = reader.readLine()) != null) {
+                    String[] credentials = line.split(",");
+                    if (credentials[0].equals(username)) {
+                        credentials[5] = String.valueOf(coins);
+                        line = String.join(",", credentials);
+                        found = true;
+                    }
+                    lines.add(line);
+                }
+
+                reader.close();
+                fis.close();
+
+                if (found) {
+                    FileOutputStream fos = openFileOutput("users.txt", MODE_PRIVATE);
+                    for (String l : lines) {
+                        fos.write((l + "\n").getBytes());
+                    }
+                    fos.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void showGameOver() {
+        tvFeedback.setText("¡Has perdido todas tus vidas!");
+        tvFeedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        tvFeedback.setVisibility(View.VISIBLE);
+        btnContinue.setVisibility(View.VISIBLE);
+        btnContinue.setText("Volver a niveles");
+
+        // Cuando el usuario haga clic en "Volver a niveles", lo regresamos a LevelsActivity
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Volver a la pantalla de niveles
+                Intent intent = new Intent(QuestionsActivity.this, LevelsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Asegura que no se mantenga la pila de actividades
+                startActivity(intent);
+                finish(); // Finaliza la actividad actual
+            }
+        });
+    }
+
+
+
+
+
+
     private void checkAnswer(String userAnswer) {
         String correctAnswer = currentQuestion.getOptions()[currentQuestion.getCorrectAnswerIndex()];
+
         if (userAnswer.equals(correctAnswer)) {
             correctAnswers++;
+            coins = coins + 10;
             showFeedback(true, "¡Excelente!");
         } else {
             showFeedback(false, "Incorrecto: La respuesta correcta es " + correctAnswer);
-        }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                questionManager.moveToNextQuestion();
-                loadCurrentQuestion();
+
+            // Restar una vida si la respuesta es incorrecta
+            lives--;
+            updateLivesDisplay(lives);
+
+            // Si el jugador se queda sin vidas
+            if (lives <= 0) {
+                // Guardar las vidas restantes (que serán 0) en el archivo
+                lives = 0; // Asegurarse de que las vidas no sean negativas
+                saveUserLives(); // Guardar la actualización en el archivo
+                showGameOver(); // Mostrar mensaje de "Game Over"
+                isGameOver = true;  // Marcar que el juego ha terminado
+                return; // Salir del método sin pasar a la siguiente pregunta
+            } else {
+                // Guardar las vidas restantes en el archivo si no se ha terminado el juego
+                saveUserLives();
             }
-        }, 3000);
+        }
+
+        // No avanzamos a la siguiente pregunta si el jugador se quedó sin vidas
+        if (lives > 0 && !isGameOver) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    questionManager.moveToNextQuestion();  // Avanzamos a la siguiente pregunta solo si aún tiene vidas
+                    loadCurrentQuestion();  // Recargamos la nueva pregunta
+                }
+            }, 2000);  // Espera 2 segundos antes de pasar a la siguiente pregunta
+        }
     }
+
+
+
+
+
 
     private void showFeedback(boolean isCorrect, String message) {
         tvFeedback.setText(message);
@@ -121,10 +333,15 @@ public class QuestionsActivity extends AppCompatActivity {
             public void run() {
                 tvFeedback.setVisibility(View.GONE);
             }
-        }, 3000);
+        }, 2000);
     }
 
     private void showTotalScore() {
+        if (isGameOver) {
+            // No mostrar la puntuación total si el juego ha terminado
+            return;
+        }
+
         findViewById(R.id.tvQuestion).setVisibility(View.GONE);
         findViewById(R.id.btnOption1).setVisibility(View.GONE);
         findViewById(R.id.btnOption2).setVisibility(View.GONE);
@@ -134,6 +351,8 @@ public class QuestionsActivity extends AppCompatActivity {
         tvScore.setVisibility(View.VISIBLE);
         btnContinue.setVisibility(View.VISIBLE);
     }
+
+
 
     private void saveLevelProgress(int currentLevel) {
         SharedPreferences sharedPreferences = getSharedPreferences("LevelPrefs", MODE_PRIVATE);
