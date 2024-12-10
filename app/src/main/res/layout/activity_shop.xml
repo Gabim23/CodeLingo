@@ -81,7 +81,7 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="8dp"
                     android:contentDescription="Cronómetro"
-                    android:src="@drawable/ic_moneda" />
+                    android:src="@drawable/ic_coin" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,389 +92,6 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:background="@drawable/cabecera"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="14dp">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vidas"
-                android:textColor="#FFFFFF"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- _________Toda seccion de un elemento_______ -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_border"
-            android:elevation="4dp"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            >
-
-            <!-- Imagen del producto -->
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="Producto"
-                android:src="@drawable/corazon_1"
-                android:background="@drawable/rounded_image"
-                android:clipToOutline="true"/>
-
-            <!-- Detalles del producto -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="1 Vida"
-                    android:textColor="#333333"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aumenta tu vida en
-                    1"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Precio y botón de compra -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="$15"
-                    android:textColor="#FF9800"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/button_comprar_vida1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#673AB7"
-                    android:text="Comprar"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </LinearLayout>
-        <!-- _______ toda una seccion de elemento________ -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_border"
-            android:elevation="4dp"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <!-- Imagen del producto -->
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="Producto"
-                android:src="@drawable/corazon_3"
-                android:background="@drawable/rounded_image"
-                android:clipToOutline="true"/>
-
-            <!-- Detalles del producto -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="3 Vidas"
-                    android:textColor="#333333"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aumenta tus vidas en
-                    3"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Precio y botón de compra -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="$40"
-                    android:textColor="#FF9800"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/button_comprar_vida3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#673AB7"
-                    android:text="Comprar"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_border"
-            android:elevation="4dp"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <!-- Imagen del producto -->
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/corazon_5"
-                android:contentDescription="Producto"
-                android:scaleType="centerCrop"
-                android:background="@drawable/rounded_image"
-                android:clipToOutline="true"/>
-
-            <!-- Detalles del producto -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="5 Vidas"
-                    android:textColor="#333333"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aumenta tus vidas en
-                    5"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Precio y botón de compra -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="$60"
-                    android:textColor="#FF9800"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/button_comprar_vida5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#673AB7"
-                    android:text="Comprar"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Repite este bloque para más productos -->
-        <!-- cabecera de secciones -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:background="@drawable/cabecera"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="14dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Potenciadores"
-                android:textColor="#FFFFFF"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="164dp">
-            <!-- Primer ítem -->
-            <LinearLayout
-                android:layout_width="102dp"
-                android:layout_height="150dp"
-                android:layout_columnWeight="1"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:background="@drawable/rounded_border"
-                android:elevation="4dp"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Pouch of Gold"
-                    android:src="@drawable/escudo"
-                    android:background="@drawable/rounded_image"
-                    android:clipToOutline="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:text="Escudo"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/button_comprar_escudo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="58dp"
-                    android:backgroundTint="#673AB7"
-                    android:text="$80"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <!-- Segundo ítem -->
-            <LinearLayout
-                android:layout_width="101dp"
-                android:layout_height="149dp"
-                android:layout_columnWeight="1"
-                android:layout_gravity="center"
-                android:background="@drawable/rounded_border"
-                android:elevation="4dp"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Minions"
-                    android:src="@drawable/pocion"
-                    android:background="@drawable/rounded_image"
-                    android:clipToOutline="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:text="Pocion"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:backgroundTint="#673AB7"
-                    android:text="$50"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <!-- Tercer ítem -->
-            <LinearLayout
-                android:layout_width="101dp"
-                android:layout_height="149dp"
-                android:layout_columnWeight="1"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:background="@drawable/rounded_border"
-                android:elevation="4dp"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="Inferno Tower"
-                    android:src="@drawable/estrella"
-                    android:background="@drawable/rounded_image"
-                    android:clipToOutline="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:text="Boost"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:backgroundTint="#673AB7"
-                    android:text="$60"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-        </GridLayout>
-
-
         <!--Cabercera de codelingopass -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -553,7 +170,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="$19.99"
                     android:textColor="#FF9800"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -564,6 +181,508 @@
                     android:textColor="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
+        <!-- cabecera de las vidas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:background="@drawable/cabecera"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="14dp"
+            android:layout_marginBottom="15dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vidas"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- _________Toda seccion de un elemento_______ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_border"
+            android:elevation="4dp"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            >
+
+            <!-- Imagen del producto -->
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Producto"
+                android:src="@drawable/corazon_1"
+                android:background="@drawable/rounded_image"
+                android:clipToOutline="true"/>
+
+            <!-- Detalles del producto -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="1 Vida"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aumenta tu vida en
+                    1"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Precio y botón de compra -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <!-- este es el linear layout para que este en horizontal -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginLeft="22dp"
+                        android:text="15"
+                        android:textColor="#FF9800"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_image"
+                        android:clipToOutline="true"
+                        android:contentDescription="Producto"
+                        android:src="@drawable/ic_coin" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button_comprar_vida1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#673AB7"
+                    android:text="Comprar"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <!-- _______ toda una seccion de elemento________ -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_border"
+            android:elevation="4dp"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Imagen del producto -->
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Producto"
+                android:src="@drawable/corazon_3"
+                android:background="@drawable/rounded_image"
+                android:clipToOutline="true"/>
+
+            <!-- Detalles del producto -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="3 Vidas"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aumenta tus vidas en
+                    3"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <!-- este es el linear layout para que este en horizontal -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginLeft="22dp"
+                        android:text="40"
+                        android:textColor="#FF9800"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_image"
+                        android:clipToOutline="true"
+                        android:contentDescription="Producto"
+                        android:src="@drawable/ic_coin" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button_comprar_vida3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#673AB7"
+                    android:text="Comprar"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_border"
+            android:elevation="4dp"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Imagen del producto -->
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/corazon_5"
+                android:contentDescription="Producto"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_image"
+                android:clipToOutline="true"/>
+
+            <!-- Detalles del producto -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="5 Vidas"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aumenta tus vidas en
+                    5"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Precio y botón de compra -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <!-- este es el linear layout para que este en horizontal -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginLeft="22dp"
+                        android:text="60"
+                        android:textColor="#FF9800"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_image"
+                        android:clipToOutline="true"
+                        android:contentDescription="Producto"
+                        android:src="@drawable/ic_coin" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button_comprar_vida5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#673AB7"
+                    android:text="Comprar"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Repite este bloque para más productos -->
+        <!-- cabecera de secciones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:background="@drawable/cabecera"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="14dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Potenciadores"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="164dp">
+            <!-- Primer ítem -->
+            <LinearLayout
+                android:layout_width="102dp"
+                android:layout_height="150dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_border"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Pouch of Gold"
+                    android:src="@drawable/escudo"
+                    android:background="@drawable/rounded_image"
+                    android:clipToOutline="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="Escudo"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="71dp"
+                    android:layout_height="40dp"
+                    android:background="#673AB7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="6dp"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_image"
+                        android:clipToOutline="true"
+                        android:contentDescription="Producto"
+                        android:src="@drawable/ic_coin" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Segundo ítem -->
+            <LinearLayout
+                android:layout_width="101dp"
+                android:layout_height="149dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_border"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Minions"
+                    android:src="@drawable/pocion"
+                    android:background="@drawable/rounded_image"
+                    android:clipToOutline="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="Pocion"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <!--prueba-->
+                <LinearLayout
+                    android:layout_width="71dp"
+                    android:layout_height="40dp"
+                    android:background="#673AB7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="6dp"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_image"
+                        android:clipToOutline="true"
+                        android:contentDescription="Producto"
+                        android:src="@drawable/ic_coin" />
+                </LinearLayout>
+
+                <!--fin de fueba -->
+            </LinearLayout>
+
+            <!-- Tercer ítem -->
+            <LinearLayout
+                android:layout_width="101dp"
+                android:layout_height="149dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_border"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Inferno Tower"
+                    android:src="@drawable/estrella"
+                    android:background="@drawable/rounded_image"
+                    android:clipToOutline="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="Boost"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="71dp"
+                    android:layout_height="40dp"
+                    android:background="#673AB7"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="6dp"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_image"
+                        android:clipToOutline="true"
+                        android:contentDescription="Producto"
+                        android:src="@drawable/ic_coin" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </GridLayout>
         <!-- Agrega más productos aquí -->
     </LinearLayout>
 
