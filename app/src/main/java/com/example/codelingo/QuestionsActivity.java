@@ -28,6 +28,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private QuestionManager questionManager;
     private Question currentQuestion;
     private int correctAnswers = 0;
+    private int coins;
     private int lives;  // Inicializar con 5 vidas
     private LinearLayout llLivesContainer;
     private boolean isGameOver = false; // Bandera para evitar mostrar el puntaje total después de Game Over
@@ -44,6 +45,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         // Cargar las vidas del usuario
         loadUserLives();
+        loadUserCoins();
         btnContinue = findViewById(R.id.btnContinue);
         tvFeedback = findViewById(R.id.tvFeedback);
         tvScore = findViewById(R.id.tvScore);
@@ -62,6 +64,7 @@ public class QuestionsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 saveLevelProgress(currentLevel);
                 updateUserScore();
+                saveUserCoins();
                 Intent intent = new Intent(QuestionsActivity.this, LevelsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -85,9 +88,6 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private void loadUserLives() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String username = sharedPreferences.getString("username", null);
@@ -101,6 +101,32 @@ public class QuestionsActivity extends AppCompatActivity {
                     String[] credentials = line.split(",");
                     if (credentials[0].equals(username)) {
                         lives = Integer.parseInt(credentials[2]);  // Cargar las vidas
+                        break;
+                    }
+                }
+                reader.close();
+                fis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        updateLivesDisplay(lives); // Actualizar la UI
+    }
+
+    private void loadUserCoins() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+
+        if (username != null) {
+            try {
+                FileInputStream fis = openFileInput("users.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] credentials = line.split(",");
+                    if (credentials[0].equals(username)) {
+                        coins = Integer.parseInt(credentials[5]);  // Cargar las vidas
                         break;
                     }
                 }
@@ -189,6 +215,44 @@ public class QuestionsActivity extends AppCompatActivity {
         }
     }
 
+    private void saveUserCoins() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+
+        if (username != null) {
+            try {
+                FileInputStream fis = openFileInput("users.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+                List<String> lines = new ArrayList<>();
+                String line;
+                boolean found = false;
+
+                while ((line = reader.readLine()) != null) {
+                    String[] credentials = line.split(",");
+                    if (credentials[0].equals(username)) {
+                        credentials[5] = String.valueOf(coins);
+                        line = String.join(",", credentials);
+                        found = true;
+                    }
+                    lines.add(line);
+                }
+
+                reader.close();
+                fis.close();
+
+                if (found) {
+                    FileOutputStream fos = openFileOutput("users.txt", MODE_PRIVATE);
+                    for (String l : lines) {
+                        fos.write((l + "\n").getBytes());
+                    }
+                    fos.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     private void showGameOver() {
         tvFeedback.setText("¡Has perdido todas tus vidas!");
@@ -220,6 +284,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         if (userAnswer.equals(correctAnswer)) {
             correctAnswers++;
+            coins = coins + 10;
             showFeedback(true, "¡Excelente!");
         } else {
             showFeedback(false, "Incorrecto: La respuesta correcta es " + correctAnswer);
