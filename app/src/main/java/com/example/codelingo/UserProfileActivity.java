@@ -32,6 +32,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userDescriptionEdit = findViewById(R.id.user_descriptionEdit);
         TextView userScoreTextView = findViewById(R.id.user_score); // TextView para el puntaje
         TextView userNameTextView = findViewById(R.id.user_name); // Nuevo TextView para mostrar el nombre
+        TextView userCoinsTextView = findViewById(R.id.user_coins); // TextView para las monedas
 
         Button goBack = findViewById(R.id.goBack);
         Button saveButton = findViewById(R.id.save_button);
@@ -45,6 +46,7 @@ public class UserProfileActivity extends AppCompatActivity {
             String email = getEmailForUser(givenUsername);
             String description = getDescForUser(givenUsername);
             String score = getScoreForUser(givenUsername);
+            String coins = getCoinsForUser(givenUsername);
 
             // Mostrar el nombre de usuario en el TextView correspondiente
             userNameTextView.setVisibility(View.VISIBLE);  // Hacer visible el TextView
@@ -62,6 +64,15 @@ public class UserProfileActivity extends AppCompatActivity {
             } else {
                 userScoreTextView.setText("Puntaje: 0");
                 userScoreTextView.setVisibility(View.VISIBLE);  // Asegurarse de que el puntaje sea visible
+            }
+
+            // Mostrar las monedas del usuario
+            if (coins != null) {
+                userCoinsTextView.setText("Monedas: " + coins + " 🪙"); // Mostrar las monedas
+                userCoinsTextView.setVisibility(View.VISIBLE); // Asegurar que sea visible
+            } else {
+                userCoinsTextView.setText("Monedas: 0 🪙");
+                userCoinsTextView.setVisibility(View.VISIBLE); // Asegurar que sea visible
             }
 
             // Guardar cambios en la descripción
@@ -87,9 +98,6 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     // Método para obtener el correo del usuario
     private String getEmailForUser(String username) {
         try {
@@ -109,7 +117,6 @@ public class UserProfileActivity extends AppCompatActivity {
         }
         return null; // Si no se encuentra el usuario
     }
-
 
     // Método para obtener la descripción del usuario
     private String getDescForUser(String username) {
@@ -131,7 +138,6 @@ public class UserProfileActivity extends AppCompatActivity {
         return null;
     }
 
-
     // Método para obtener el puntaje del usuario
     private String getScoreForUser(String username) {
         try {
@@ -152,6 +158,25 @@ public class UserProfileActivity extends AppCompatActivity {
         return null;
     }
 
+    // Método para obtener las monedas del usuario
+    private String getCoinsForUser(String username) {
+        try {
+            FileInputStream fis = openFileInput("users.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] credentials = line.split(",");
+                if (credentials.length >= 5 && credentials[0].equals(username)) {
+                    return credentials[5]; // Devuelve la cantidad de monedas
+                }
+            }
+            reader.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // Si no se encuentra el usuario
+    }
 
     // Método para guardar la descripción del usuario
     private boolean saveDescForUser(String username, String newDescription) {
