@@ -48,6 +48,9 @@ public class LevelsActivity extends AppCompatActivity implements OnLevelClickLis
             editor.putBoolean("level_0", true);
             editor.putBoolean("level_1", false);
             editor.putBoolean("level_2", false);
+            editor.putBoolean("level_3", false);
+            editor.putBoolean("level_4", false);
+            editor.putBoolean("level_5", false);
             editor.apply();
         }
 
