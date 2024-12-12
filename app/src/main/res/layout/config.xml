@@ -1,68 +1,116 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sign_up"
-    android:layout_gravity="center">
+    android:background="@drawable/back">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="147dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_preferences" />
 
-    <Button
-        android:id="@+id/changePasswordButton2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:background="@drawable/btndesign"
-        android:backgroundTint="#000000"
-        android:padding="12dp"
-        android:text="Cambiar contraseña"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+    <!-- LinearLayout for the rest of the UI -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/logoutButton2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/btndesign"
-        android:backgroundTint="#000000"
-        android:padding="12dp"
-        android:text="Cerrar sesión"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/changePasswordButton2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="0dp">
 
-    <Button
-        android:id="@+id/goBack2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/btndesign"
-        android:padding="12dp"
-        android:text="@string/volver"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoutButton2" />
+            <!-- Logo Image -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- App Title -->
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="98dp"
+                app:srcCompat="@drawable/icono_config" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/myfont"
+                android:shadowColor="#80000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4"
+                android:text="Configuración"
+                android:textColor="@color/textColor"
+                android:textSize="40sp" />
+
+        </LinearLayout>
+
+        <!-- GridLayout for the buttons -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:padding="8dp"
+            android:rowCount="3">
+
+            <Button
+                android:id="@+id/changePasswordButton2"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Cambiar contraseña"
+                android:drawableTop="@android:drawable/ic_menu_edit"
+                android:drawablePadding="12dp"
+                android:elevation="6dp"
+                android:padding="12dp"
+                android:text="Cambiar contrasña"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/logoutButton2"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Cerrar sesión"
+                android:drawableTop="@android:drawable/ic_menu_close_clear_cancel"
+                android:drawablePadding="12dp"
+                android:elevation="6dp"
+                android:padding="12dp"
+                android:text="Cerrar sesión"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/goBack2"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/button_background"
+                android:contentDescription="Volver"
+                android:drawableTop="@android:drawable/ic_menu_revert"
+                android:drawablePadding="12dp"
+                android:elevation="6dp"
+                android:padding="12dp"
+                android:text="Volver"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Button 6: Tienda -->
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
