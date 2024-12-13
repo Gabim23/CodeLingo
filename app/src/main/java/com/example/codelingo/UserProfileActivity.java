@@ -127,7 +127,7 @@ public class UserProfileActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 String[] credentials = line.split(",");
                 if (credentials.length >= 3 && credentials[0].equals(username)) {
-                    return credentials[2]; // Devuelve la descripción
+                    return credentials[6]; // Devuelve la descripción
                 }
             }
             reader.close();
@@ -193,7 +193,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     if (credentials.length == 2) {
                         line = credentials[0] + "," + credentials[1] + "," + newDescription;
                     } else if (credentials.length >= 3) {
-                        credentials[2] = newDescription;
+                        credentials[6] = newDescription;
                         line = String.join(",", credentials);
                     }
                     found = true;
