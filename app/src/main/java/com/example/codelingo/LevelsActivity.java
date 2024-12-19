@@ -15,12 +15,18 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
+import android.os.Handler;
+import java.util.Calendar;
+
 public class LevelsActivity extends AppCompatActivity implements OnLevelClickListener {
 
     private RecyclerView rvLevels;
     private TextView tvMessage;
-    private TextView tvLives;  // Nueva variable para mostrar las vidas
+    private TextView tvLives;
     private int lives;
+    private static final int MAX_LIVES = 5;
+    private static final int LIFE_RESTORE_INTERVAL = 600000; // 10 minutos en milisegundos
+    private Handler lifeRestoreHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,39 +38,104 @@ public class LevelsActivity extends AppCompatActivity implements OnLevelClickLis
 
         tvMessage = findViewById(R.id.tvMessage);
 
-        // Leer las vidas del usuario
-        loadUserLives();  // Cargar las vidas desde el archivo y actualizar la visualización
+        loadUserLives();
+        restoreLives();
+        // Leer y restaurar las vidas del usuario
 
-        // Mostrar mensaje de bienvenida
+        scheduleLifeRestore(); // Programar restauración periódica de vidas
+
         tvMessage.setVisibility(View.VISIBLE);
         tvMessage.setText("Selecciona un nivel");
 
-        // Inicializar SharedPreferences para gestionar los niveles desbloqueados
         SharedPreferences sharedPreferences = getSharedPreferences("LevelPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        // Desbloquear el Nivel 0 por defecto si es la primera vez
         if (!sharedPreferences.contains("level_0")) {
             editor.putBoolean("level_0", true);
-            editor.putBoolean("level_1", false);
-            editor.putBoolean("level_2", false);
-            editor.putBoolean("level_3", false);
-            editor.putBoolean("level_4", false);
-            editor.putBoolean("level_5", false);
             editor.apply();
         }
 
-        // Preparar el array de niveles
-        int totalLevels = 10; // Ajustar según sea necesario
-        String[] levels = new String[totalLevels];
-        for (int i = 0; i < totalLevels; i++) {
+        String[] levels = new String[10];
+        for (int i = 0; i < levels.length; i++) {
             boolean isUnlocked = sharedPreferences.getBoolean("level_" + i, false);
             levels[i] = isUnlocked ? "Nivel " + i : "Nivel " + i + " (🔒)";
         }
 
-        // Inicializar el adaptador de RecyclerView
         LevelsAdapter adapter = new LevelsAdapter(this, levels, this);
         rvLevels.setAdapter(adapter);
+    }
+
+    private void restoreLives() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+
+        if (username != null) {
+            // Cargar las vidas actuales del usuario
+            try {
+                FileInputStream fis = openFileInput("users.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] credentials = line.split(",");
+                    if (credentials[0].equals(username)) {
+                        lives = Integer.parseInt(credentials[2]); // Cargar las vidas actuales
+                        break;
+                    }
+                }
+                reader.close();
+                fis.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                lives = 0; // Valor predeterminado si hay un error
+            }
+
+            // Cálculo de vidas restauradas
+            long lastLifeLostTime = sharedPreferences.getLong("last_life_lost_time", 0);
+            long currentTime = Calendar.getInstance().getTimeInMillis();
+
+            if (lastLifeLostTime == 0) {
+                // Si no hay registro previo, inicializar el tiempo actual
+                sharedPreferences.edit().putLong("last_life_lost_time", currentTime).apply();
+                return;
+            }
+
+            // Asegúrate de que la diferencia de tiempo esté en milisegundos
+            long timeElapsed = currentTime - lastLifeLostTime;
+            int livesToRestore = (int) (timeElapsed / LIFE_RESTORE_INTERVAL);
+
+            if (livesToRestore > 0) {
+                // Sumar vidas restauradas y limitar a MAX_LIVES
+                lives = Math.min(lives + livesToRestore, MAX_LIVES);
+
+                if (lives < MAX_LIVES) {
+                    // Actualizar el tiempo restante para la siguiente restauración
+                    sharedPreferences.edit()
+                            .putLong("last_life_lost_time", currentTime - (timeElapsed % LIFE_RESTORE_INTERVAL))
+                            .apply();
+                } else {
+                    // Si las vidas están al máximo, eliminar el registro del último tiempo
+                    sharedPreferences.edit().remove("last_life_lost_time").apply();
+                }
+            }
+        } else {
+            lives = 0; // Si no hay usuario, establecer 0 vidas
+        }
+
+        updateLivesDisplay(lives); // Actualizar la interfaz con las vidas actuales
+    }
+
+
+    private void scheduleLifeRestore() {
+        lifeRestoreHandler.postDelayed(() -> {
+            restoreLives();
+            scheduleLifeRestore();
+        }, LIFE_RESTORE_INTERVAL);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        lifeRestoreHandler.removeCallbacksAndMessages(null); // Eliminar callbacks al destruir la actividad
     }
 
 
@@ -81,7 +152,7 @@ public class LevelsActivity extends AppCompatActivity implements OnLevelClickLis
                 while ((line = reader.readLine()) != null) {
                     String[] credentials = line.split(",");
                     if (credentials[0].equals(username)) {
-                        lives = Integer.parseInt(credentials[2]);  // Cargar las vidas
+                        lives = Integer.parseInt(credentials[3]);  // Cargar las vidas
                         break;
                     }
                 }
@@ -103,24 +174,23 @@ public class LevelsActivity extends AppCompatActivity implements OnLevelClickLis
         llLivesContainer.removeAllViews(); // Limpiar los corazones actuales
 
         if (lives <= 0) {
-            // Si no hay vidas, mostrar el mensaje "No hay Vidas"
             TextView noLivesMessage = new TextView(this);
             noLivesMessage.setText("No hay Vidas");
-            noLivesMessage.setTextSize(18);  // Ajusta el tamaño del texto si es necesario
-            noLivesMessage.setTextColor(getResources().getColor(android.R.color.holo_red_dark));  // Color del texto
-            noLivesMessage.setGravity(Gravity.CENTER);  // Centra el texto
-            llLivesContainer.addView(noLivesMessage);  // Añadir el mensaje al contenedor
+            noLivesMessage.setTextSize(18);
+            noLivesMessage.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            noLivesMessage.setGravity(Gravity.CENTER);
+            llLivesContainer.addView(noLivesMessage);
         } else {
-            // Si hay vidas, añadir los corazones
             for (int i = 0; i < lives; i++) {
                 TextView heart = new TextView(this);
                 heart.setText("❤️");
-                heart.setTextSize(24);  // Tamaño del corazón
-                heart.setPadding(8, 0, 8, 0);  // Espaciado entre los corazones
-                llLivesContainer.addView(heart);  // Añadir al contenedor
+                heart.setTextSize(24);
+                heart.setPadding(8, 0, 8, 0);
+                llLivesContainer.addView(heart);
             }
         }
     }
+
 
 
 

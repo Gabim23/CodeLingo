@@ -16,8 +16,10 @@ public class LevelManager {
     private TextView tvQuestion, tvScore;
     private Button btnOption1, btnOption2, btnOption3, btnOption4, btnContinue;
     private Context context;
+    private int livesRemaining;
 
-    public LevelManager(Context context, int level, TextView tvQuestion, TextView tvScore,
+
+    public LevelManager(Context context, int level, int livesRemaining, TextView tvQuestion, TextView tvScore,
                         Button btnOption1, Button btnOption2, Button btnOption3, Button btnOption4, Button btnContinue) {
         this.context = context;
         this.tvQuestion = tvQuestion;
@@ -27,6 +29,7 @@ public class LevelManager {
         this.btnOption3 = btnOption3;
         this.btnOption4 = btnOption4;
         this.btnContinue = btnContinue;
+        this.livesRemaining = livesRemaining; // Inicializar vidas
         questionManager = new QuestionManager(level);
         scoreManager = new ScoreManager();
         setupListeners();
@@ -106,22 +109,27 @@ public class LevelManager {
         Question currentQuestion = questionManager.getCurrentQuestion();
         if (currentQuestion != null) {
             if (currentQuestion.getCorrectAnswerIndex() == selectedAnswer) {
-                scoreManager.incrementScore(); // Aumentar la puntuación del nivel
+                scoreManager.incrementScore();
                 Toast.makeText(context, "¡Correcto!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, "Incorrecto", Toast.LENGTH_SHORT).show();
+                livesRemaining--; // Resta una vida
+                Toast.makeText(context, "Incorrecto. Vidas restantes: " + livesRemaining, Toast.LENGTH_SHORT).show();
+
+                if (livesRemaining <= 0) {
+                    Toast.makeText(context, "¡Has perdido todas tus vidas!", Toast.LENGTH_LONG).show();
+                    saveLivesToSharedPreferences();
+                    endLevel();
+                    return; // Salir si no hay más vidas
+                }
             }
 
             if (questionManager.hasNextQuestion()) {
                 questionManager.moveToNextQuestion();
                 loadQuestion();
             } else {
-                // Guardar progreso y actualizar la puntuación del usuario al finalizar el nivel
                 saveLevelProgress(questionManager.getLevel());
-                updateUserScore(scoreManager.getScore()); // Actualizar la puntuación del usuario
+                updateUserScore(scoreManager.getScore());
                 tvScore.setText("Puntuación final: " + scoreManager.getScore());
-                Toast.makeText(context, getCongratulatoryMessage(scoreManager.getScore()), Toast.LENGTH_LONG).show();
-
                 tvQuestion.setVisibility(View.GONE);
                 btnOption1.setVisibility(View.GONE);
                 btnOption2.setVisibility(View.GONE);
@@ -130,6 +138,20 @@ public class LevelManager {
                 btnContinue.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    private void saveLivesToSharedPreferences() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("lives", livesRemaining);
+        editor.apply();
+    }
+
+    private void endLevel() {
+        Intent intent = new Intent(context, LevelsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+        ((Activity) context).finish();
     }
 
     private void updateUserScore(int score) {

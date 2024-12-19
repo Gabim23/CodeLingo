@@ -40,25 +40,37 @@ public class QuestionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
+
         llLivesContainer = findViewById(R.id.llLivesContainer);
-
-
-        // Cargar las vidas del usuario
-        loadUserLives();
-        loadUserCoins();
         btnContinue = findViewById(R.id.btnContinue);
         tvFeedback = findViewById(R.id.tvFeedback);
         tvScore = findViewById(R.id.tvScore);
         currentLevel = getIntent().getIntExtra("CURRENT_LEVEL", 0);
+        lives = getIntent().getIntExtra("LIVES_REMAINING", 5); // Obtener vidas restantes
         questionManager = new QuestionManager(currentLevel);
+
+        updateLivesDisplay(lives); // Mostrar las vidas iniciales
+
+
         loadCurrentQuestion();
         TextView tvQuestion = findViewById(R.id.tvQuestion);
         Button btnOption1 = findViewById(R.id.btnOption1);
         Button btnOption2 = findViewById(R.id.btnOption2);
         Button btnOption3 = findViewById(R.id.btnOption3);
         Button btnOption4 = findViewById(R.id.btnOption4);
-        LevelManager levelManager = new LevelManager(this, currentLevel, tvQuestion, tvScore, btnOption1, btnOption2, btnOption3, btnOption4, btnContinue);
-        setOptionButtonListeners(btnOption1, btnOption2, btnOption3, btnOption4);
+        LevelManager levelManager = new LevelManager(
+                this,
+                currentLevel,
+                getIntent().getIntExtra("LIVES_REMAINING", 5), // Recoger vidas restantes
+                tvQuestion,
+                tvScore,
+                btnOption1,
+                btnOption2,
+                btnOption3,
+                btnOption4,
+                btnContinue
+        );        setOptionButtonListeners(btnOption1, btnOption2, btnOption3, btnOption4);
+
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,11 +90,18 @@ public class QuestionsActivity extends AppCompatActivity {
     private void updateLivesDisplay(int lives) {
         llLivesContainer.removeAllViews(); // Limpiar los corazones actuales
 
+        // Mostrar "Vidas:" seguido de los corazones
+        TextView livesLabel = new TextView(this);
+        livesLabel.setText("Vidas: ");
+        livesLabel.setTextSize(18);  // Tamaño del texto
+        llLivesContainer.addView(livesLabel);
+
+        // Añadir corazones en función de las vidas restantes
         for (int i = 0; i < lives; i++) {
             TextView heart = new TextView(this);
             heart.setText("❤️");
-            heart.setTextSize(24); // Tamaño del corazón
-            heart.setPadding(8, 0, 8, 0); // Espaciado entre los corazones
+            heart.setTextSize(24);  // Tamaño del corazón
+            heart.setPadding(8, 0, 8, 0);  // Espaciado entre los corazones
             llLivesContainer.addView(heart); // Añadir al contenedor
         }
     }
@@ -100,33 +119,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 while ((line = reader.readLine()) != null) {
                     String[] credentials = line.split(",");
                     if (credentials[0].equals(username)) {
-                        lives = Integer.parseInt(credentials[2]);  // Cargar las vidas
-                        break;
-                    }
-                }
-                reader.close();
-                fis.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        updateLivesDisplay(lives); // Actualizar la UI
-    }
-
-    private void loadUserCoins() {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", null);
-
-        if (username != null) {
-            try {
-                FileInputStream fis = openFileInput("users.txt");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] credentials = line.split(",");
-                    if (credentials[0].equals(username)) {
-                        coins = Integer.parseInt(credentials[5]);  // Cargar las vidas
+                        lives = Integer.parseInt(credentials[3]);  // Cargar las vidas
                         break;
                     }
                 }
@@ -192,7 +185,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 while ((line = reader.readLine()) != null) {
                     String[] credentials = line.split(",");
                     if (credentials[0].equals(username)) {
-                        credentials[2] = String.valueOf(lives);  // Actualizar las vidas a 0 si es necesario
+                        credentials[3] = String.valueOf(lives); // Actualizar las vidas en el archivo
                         line = String.join(",", credentials);
                         found = true;
                     }
@@ -213,7 +206,13 @@ public class QuestionsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        // También guarda las vidas en SharedPreferences como respaldo
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("lives", lives);
+        editor.apply();
     }
+
 
     private void saveUserCoins() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -261,61 +260,45 @@ public class QuestionsActivity extends AppCompatActivity {
         btnContinue.setVisibility(View.VISIBLE);
         btnContinue.setText("Volver a niveles");
 
-        // Cuando el usuario haga clic en "Volver a niveles", lo regresamos a LevelsActivity
-        btnContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Volver a la pantalla de niveles
-                Intent intent = new Intent(QuestionsActivity.this, LevelsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Asegura que no se mantenga la pila de actividades
-                startActivity(intent);
-                finish(); // Finaliza la actividad actual
-            }
+        btnContinue.setOnClickListener(v -> {
+            saveUserLives(); // Guarda las vidas antes de regresar
+            Intent intent = new Intent(QuestionsActivity.this, LevelsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Asegura que se reinicie LevelsActivity
+            startActivity(intent);
+            finish(); // Finaliza la actividad actual
         });
     }
-
-
-
-
-
 
     private void checkAnswer(String userAnswer) {
         String correctAnswer = currentQuestion.getOptions()[currentQuestion.getCorrectAnswerIndex()];
 
         if (userAnswer.equals(correctAnswer)) {
             correctAnswers++;
-            coins = coins + 10;
+            coins += 10;
             showFeedback(true, "¡Excelente!");
         } else {
             showFeedback(false, "Incorrecto: La respuesta correcta es " + correctAnswer);
 
             // Restar una vida si la respuesta es incorrecta
             lives--;
-            updateLivesDisplay(lives);
+            updateLivesDisplay(lives); // Actualizar UI con las vidas restantes
+            saveUserLives(); // Guardar las vidas restantes (que serán 0)
 
             // Si el jugador se queda sin vidas
             if (lives <= 0) {
-                // Guardar las vidas restantes (que serán 0) en el archivo
                 lives = 0; // Asegurarse de que las vidas no sean negativas
-                saveUserLives(); // Guardar la actualización en el archivo
                 showGameOver(); // Mostrar mensaje de "Game Over"
-                isGameOver = true;  // Marcar que el juego ha terminado
+                isGameOver = true; // Marcar que el juego ha terminado
                 return; // Salir del método sin pasar a la siguiente pregunta
-            } else {
-                // Guardar las vidas restantes en el archivo si no se ha terminado el juego
-                saveUserLives();
             }
         }
 
-        // No avanzamos a la siguiente pregunta si el jugador se quedó sin vidas
+        // Si aún quedan vidas y el juego no ha terminado, pasa a la siguiente pregunta
         if (lives > 0 && !isGameOver) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    questionManager.moveToNextQuestion();  // Avanzamos a la siguiente pregunta solo si aún tiene vidas
-                    loadCurrentQuestion();  // Recargamos la nueva pregunta
-                }
-            }, 2000);  // Espera 2 segundos antes de pasar a la siguiente pregunta
+            new Handler().postDelayed(() -> {
+                questionManager.moveToNextQuestion();
+                loadCurrentQuestion(); // Cargar la nueva pregunta
+            }, 2000);
         }
     }
 
