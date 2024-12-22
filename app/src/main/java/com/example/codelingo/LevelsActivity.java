@@ -117,8 +117,6 @@ public class LevelsActivity extends AppCompatActivity implements OnLevelClickLis
                     sharedPreferences.edit().remove("last_life_lost_time").apply();
                 }
             }
-        } else {
-            lives = 0; // Si no hay usuario, establecer 0 vidas
         }
 
         updateLivesDisplay(lives); // Actualizar la interfaz con las vidas actuales
@@ -152,7 +150,7 @@ public class LevelsActivity extends AppCompatActivity implements OnLevelClickLis
                 while ((line = reader.readLine()) != null) {
                     String[] credentials = line.split(",");
                     if (credentials[0].equals(username)) {
-                        lives = Integer.parseInt(credentials[3]);  // Cargar las vidas
+                        lives = Integer.parseInt(credentials[2]);  // Cargar las vidas
                         break;
                     }
                 }
