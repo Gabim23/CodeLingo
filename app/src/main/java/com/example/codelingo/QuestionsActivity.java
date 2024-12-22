@@ -46,11 +46,9 @@ public class QuestionsActivity extends AppCompatActivity {
         tvFeedback = findViewById(R.id.tvFeedback);
         tvScore = findViewById(R.id.tvScore);
         currentLevel = getIntent().getIntExtra("CURRENT_LEVEL", 0);
-        lives = getIntent().getIntExtra("LIVES_REMAINING", 5); // Obtener vidas restantes
         questionManager = new QuestionManager(currentLevel);
-
+        loadUserLives();
         updateLivesDisplay(lives); // Mostrar las vidas iniciales
-
 
         loadCurrentQuestion();
         TextView tvQuestion = findViewById(R.id.tvQuestion);
@@ -119,7 +117,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 while ((line = reader.readLine()) != null) {
                     String[] credentials = line.split(",");
                     if (credentials[0].equals(username)) {
-                        lives = Integer.parseInt(credentials[3]);  // Cargar las vidas
+                        lives = Integer.parseInt(credentials[2]);  // Cargar las vidas
                         break;
                     }
                 }
@@ -185,7 +183,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 while ((line = reader.readLine()) != null) {
                     String[] credentials = line.split(",");
                     if (credentials[0].equals(username)) {
-                        credentials[3] = String.valueOf(lives); // Actualizar las vidas en el archivo
+                        credentials[2] = String.valueOf(lives); // Actualizar las vidas en el archivo
                         line = String.join(",", credentials);
                         found = true;
                     }
@@ -254,20 +252,39 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
     private void showGameOver() {
-        tvFeedback.setText("¡Has perdido todas tus vidas!");
+        tvFeedback.setText("¡Has perdido todas tus vidas! Elige una opción:");
         tvFeedback.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
         tvFeedback.setVisibility(View.VISIBLE);
+
         btnContinue.setVisibility(View.VISIBLE);
-        btnContinue.setText("Volver a niveles");
+        btnContinue.setText("Volver al menú principal");
+
+        Button btnGoToShop = new Button(this);
+        btnGoToShop.setText("Comprar más vidas");
+        btnGoToShop.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
+        btnGoToShop.setTextColor(getResources().getColor(android.R.color.white));
+        btnGoToShop.setPadding(16, 16, 16, 16);
+
+        LinearLayout parentLayout = (LinearLayout) findViewById(R.id.llLivesContainer);
+        parentLayout.addView(btnGoToShop); // Agrega el botón al diseño dinámicamente
 
         btnContinue.setOnClickListener(v -> {
             saveUserLives(); // Guarda las vidas antes de regresar
-            Intent intent = new Intent(QuestionsActivity.this, LevelsActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Asegura que se reinicie LevelsActivity
+            Intent intent = new Intent(QuestionsActivity.this, WelcomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Asegura que se reinicie el menú principal
             startActivity(intent);
-            finish(); // Finaliza la actividad actual
+            finish();
+        });
+
+        btnGoToShop.setOnClickListener(v -> {
+            saveUserLives(); // Guarda las vidas antes de redirigir
+            Intent intent = new Intent(QuestionsActivity.this, Shop.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Asegura que se reinicie la tienda
+            startActivity(intent);
+            finish();
         });
     }
+
 
     private void checkAnswer(String userAnswer) {
         String correctAnswer = currentQuestion.getOptions()[currentQuestion.getCorrectAnswerIndex()];
